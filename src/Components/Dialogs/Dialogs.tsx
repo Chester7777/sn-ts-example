@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogsPageType } from "../../redux/state";
+import {addMessage, DialogsPageType, MessagesType} from "../../redux/state";
 import s from "./Dialog.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
@@ -7,12 +7,16 @@ import Message from "./Message/Message";
 
 type PropsType = {
     dialogsPage: DialogsPageType
+    addMessage: () => void
+    updateNewMessageText: (newMessage: string) => void
+    newMessageText: string
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
 
     const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
-    const messagesElement = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}/>)
+    const messagesElement = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}
+                                                                           addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} newMessageText={props.newMessageText}/>)
 
 
     return (

@@ -10,10 +10,15 @@ import Profile from "./Components/Profile/Profile";
 import Setting from "./Components/Setting/Setting";
 import DialogItem from "./Components/Dialogs/DialogItem/DialogItem";
 import Message from "./Components/Dialogs/Message/Message";
-import {DialogsPageType, ProfilePageType, RootStateType} from "./redux/state";
+import {addMessage, DialogsPageType, ProfilePageType, RootStateType} from "./redux/state";
 
 type AppType = {
     state: RootStateType
+    addPost: () => void
+    addMessage: () => void
+    updateNewPostText: (newText: string) => void
+    updateNewMessageText: (newMessage: string) => void
+    newMessageText: string
 }
 
 
@@ -27,10 +32,19 @@ const App: React.FC<AppType> = (props) => {
                 <div className="app-wrapper-content">
                     <Route path="/dialogs"
                            render={() => <Dialogs
-                               dialogsPage={props.state.dialogsPage}/>}/>
+                               dialogsPage={props.state.dialogsPage}
+                               addMessage={props.addMessage}
+                               newMessageText={props.newMessageText}
+                               updateNewMessageText={props.updateNewMessageText}
+                           />}
+
+                    />
                     <Route path="/profile"
                            render={() => <Profile
-                               profilePage={props.state.profilePage}/>}/>
+                               profilePage={props.state.profilePage}
+                               addPost={props.addPost}
+                               updateNewPostText={props.updateNewPostText}
+                           />}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Setting/>}/>
