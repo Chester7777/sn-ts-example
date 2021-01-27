@@ -1,83 +1,47 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
+import { DialogsPageType } from "../../redux/state";
 import s from "./Dialog.module.css";
+import DialogItem from "./DialogItem/DialogItem";
+import Message from "./Message/Message";
 
-type DialogsPropsType = {
-    dialogsData: DialogsDataPropsType
-    messagesData: MessagesDataPropsType
-}
-type  DialogItemPropsType = {
-    name: string
-    id: number
 
-}
-type MessagePropsType = {
-    messages: string
-    id: number
-
-}
-type DialogsDataPropsType = {
-    id: number
-    name: string
-
-}
-type MessagesDataPropsType = {
-    id: number
-    messages: string
+type PropsType = {
+    dialogsPage: DialogsPageType
 }
 
-const DialogItem = (props: DialogItemPropsType) => {
-    let path = "/dialogs/1" + props.id;
-    return (
+const Dialogs: React.FC<PropsType> = (props) => {
 
-        <div className={s.dialogsItems + " " + s.active}>
-            <NavLink to={path}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-const Message = (props: MessagePropsType) => {
-    return (
-        <div className={s.messages}>
-            <div className={s.message}>{props.messages}</div>
-        </div>
-    )
-}
+    const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
+    const messagesElement = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}/>)
 
 
-let dialogsData = [
-    {id: 1, name: "Dima"},
-    {id: 2, name: "Jeny"},
-    {id: 3, name: "Oly"},
-    {id: 4, name: "Milana"},
-    {id: 5, name: "Katy"},
-    {id: 6, name: "Andrey"},
-]
-
-let messagesData = [
-    {id: 1, messages: "Hi"},
-    {id: 2, messages: "How is your It-kamasutra?"},
-    {id: 3, messages: "Yo"},
-]
-
-const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems + " " + s.active}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
-                <DialogItem id={dialogsData[2].id} name={dialogsData[2].name}/>
-                <DialogItem id={dialogsData[3].id} name={dialogsData[3].name}/>
-                <DialogItem id={dialogsData[4].id} name={dialogsData[4].name}/>
-                <DialogItem id={dialogsData[5].id} name={dialogsData[5].name}/>
+                <img src="https://i.pinimg.com/originals/9a/da/3b/9ada3bc305a1f45eab527f60da172d53.png" alt=""/>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm4B-uFtqzkLT-t0vUQtY3tZmoPuPASXzjDw&usqp=CAU"
+                    alt=""/>
+                <img
+                    src="https://socialniesety.ru/files/images/components/articles_journal/originals/instagram/422/kak_sdelat_artavatarku_v_instagram_18.jpg"
+                    alt=""/>
+                <img src="https://linedot.ru/wp-content/uploads/2019/10/avatarki-dlya-steam_11.jpg" alt=""/>
+                <img
+                    src="https://avatars.mds.yandex.net/get-zen_doc/235144/pub_5d92e1109c944600ae6bfc5d_5d92e1c7aad43600adecf124/scale_1200"
+                    alt=""/>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQb_O0f0c1A4kOSifv2lykdbjhhXF5r6N-9kw&usqp=CAU"
+                    alt=""/>
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message id={messagesData[0].id} messages={messagesData[0].messages}/>
-                <Message id={messagesData[1].id} messages={messagesData[1].messages}/>
-                <Message id={messagesData[2].id} messages={messagesData[2].messages}/>
+                {messagesElement}
             </div>
         </div>
     )
 }
 
 export default Dialogs;
+
+
+

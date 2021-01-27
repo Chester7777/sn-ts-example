@@ -1,10 +1,8 @@
 import React from "react";
 
-type SettingPropsType = {
 
-}
 
-const Setting = (props: SettingPropsType) => {
+const Setting = () => {
     return(
         <div>
             Setting

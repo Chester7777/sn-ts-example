@@ -1,60 +1,68 @@
-type MassagesType = {
-    id: number,
-    massage: string
-}
-type DialogsType = {
-    id: number,
+export type FriendsType = {
     name: string
+    age: number
+    id: number
 }
-type DialogsPageType = {
-    dialogs: Array<DialogsType>
-    massages: Array<MassagesType>
+export type PostsType = {
+    message: string
+    likes: string
+    id: number
+}
+export type MessagesType = {
+    messages: string
+    id: number
+}
+export type DialogsType = {
+    name: string
+    id: number
+}
 
+export type SidebarType = {
+    friends: Array<FriendsType>
 }
-type PostsType = {
-    id: number,
-    massage: string,
-    likesCount: number
-}
-type ProfilePageType = {
+export type ProfilePageType = {
     posts: Array<PostsType>
 }
-type SideBarType = {}
-type RootStateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType,
-    sideBar: SideBarType
+export type DialogsPageType = {
+    dialogs: Array<DialogsType>
+    messages: Array<MessagesType>
+}
+export type RootStateType = {
+    sidebar: SidebarType
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
 
 let state: RootStateType = {
-    profilePage: {
-        posts: [
-            {id: 1, massage: "Hi, how are yue?", likesCount: 12},
-            {id: 2, massage: "It`s my first post?", likesCount: 11},
-            {id: 3, massage: "Blabla", likesCount: 11},
-            {id: 4, massage: "Data", likesCount: 11}
-        ]
-    },
     dialogsPage: {
         dialogs: [
-            {id: 1, name: "Dimych"},
-            {id: 2, name: "Andrew"},
-            {id: 3, name: "Sveta"},
-            {id: 4, name: "Sasha"},
-            {id: 5, name: "Victor"},
-            {id: 6, name: "Valera"}
+            {id: 1, name: "Dima"},
+            {id: 2, name: "Jeny"},
+            {id: 3, name: "Oly"},
+            {id: 4, name: "Milana"},
+            {id: 5, name: "Katy"},
+            {id: 6, name: "Andrey"},
         ],
-        massages: [
-            {id: 1, massage: "Hi"},
-            {id: 2, massage: "How is your it-kamasutra?"},
-            {id: 3, massage: "Yo"},
-            {id: 4, massage: "Yo"},
-            {id: 5, massage: "Yo"}
+        messages: [
+            {id: 1, messages: "Hi"},
+            {id: 2, messages: "How is your It-kamasutra?"},
+            {id: 3, messages: "Yo"},
         ]
     },
-    sideBar: {}
-
+    profilePage: {
+        posts: [
+            {id: 1, message: "Hey, why nobody love me", likes: "15"},
+            {id: 2, message: "It`s our new program! Hey", likes: "20"},
+        ]
+    },
+    sidebar: {
+        friends: [
+            {name: "Andrew", age: 32, id: 1},
+            {name: "Sasha", age: 33, id: 2},
+            {name: "Sveta", age: 29, id: 3},
+        ]
+    }
 }
 
-export default state
+export default state;

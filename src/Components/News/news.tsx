@@ -1,11 +1,9 @@
 import React from "react";
 
 
-type NewsPropsType = {
 
-}
 
-function News (props: NewsPropsType) {
+function News () {
     return (
         <div>
             News

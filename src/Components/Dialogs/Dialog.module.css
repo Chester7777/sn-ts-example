@@ -3,13 +3,16 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItem .dialog {
+.dialogsItems .dialog {
     padding: 10px;
     color: red;
 }
 
-.dialogsItem .active {
+.dialogsItems .active {
     color: gold;
+    padding: 0 30px 2px 36px;
+    margin: 0;
+
 }
 
 
@@ -17,4 +20,17 @@
     padding: 2px;
     color: red;
 }
+
+
+.dialogs img {
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    margin: 0;
+    /*flex: 0 0 auto;*/
+    /*overflow: hidden;*/
+}
+
 

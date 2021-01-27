@@ -2,9 +2,8 @@ import React from "react";
 import s from "./ProfileInfo.module.css"
 
 
-type ProfileInfoPropsType = {}
 
-const ProfileInfo = (props: ProfileInfoPropsType) => {
+const ProfileInfo = () => {
     return (
         <div>
             <div className={s.image}>

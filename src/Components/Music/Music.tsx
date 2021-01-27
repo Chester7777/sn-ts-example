@@ -1,10 +1,7 @@
 import React from "react";
 
-type MusicPropsType = {
 
-}
-
-const  Music = (props: MusicPropsType) => {
+const  Music = () => {
     return(
         <div>
             Music

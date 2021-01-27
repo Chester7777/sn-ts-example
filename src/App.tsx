@@ -8,43 +8,37 @@ import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/news";
 import Profile from "./Components/Profile/Profile";
 import Setting from "./Components/Setting/Setting";
-//import {BrowserRouter, Route} from "react-router-dom";
+import DialogItem from "./Components/Dialogs/DialogItem/DialogItem";
+import Message from "./Components/Dialogs/Message/Message";
+import {DialogsPageType, ProfilePageType, RootStateType} from "./redux/state";
 
-const App = () => {
+type AppType = {
+    state: RootStateType
+}
+
+
+const App: React.FC<AppType> = (props) => {
+
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar/>
+                <Navbar friends={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
-                    <Route path="/dialogs" component={Dialogs}/>
-                    <Route path="/profile" component={Profile}/>
-                    <Route path="/news" component={News} />
-                    <Route path="/music" component={Music} />
-                    <Route path="/settings" component={Setting} />
+                    <Route path="/dialogs"
+                           render={() => <Dialogs
+                               dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path="/profile"
+                           render={() => <Profile
+                               profilePage={props.state.profilePage}/>}/>
+                    <Route path="/news" render={() => <News/>}/>
+                    <Route path="/music" render={() => <Music/>}/>
+                    <Route path="/settings" render={() => <Setting/>}/>
                 </div>
             </div>
         </BrowserRouter>
-
-        //     {/*/!*<Route path={"/hallo"} render={() => <HalloMassage massage={"Hallo my friends"}/>}/>*!/*/}
-        //     {/*<Route path={"/bye"} render={() => <ByeMassage massage={"Bye my incubatr"}/>}/>*/}
-
-
     )
 }
-
-
-// type MassageType = {
-//     massage: string
-// }
-//
-// function HalloMassage(props: MassageType) {
-//     return <h1>{props.massage}</h1>
-// }
-//
-// const ByeMassage: React.FC<MassageType> = (props) => {
-//     return <h2>{props.massage}</h2>
-// }
 
 
 export default App;
