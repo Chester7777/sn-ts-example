@@ -1,5 +1,6 @@
-import {rerenderEntireTree} from "../render";
-
+let rerenderEntireTree = (state: RootStateType) => {
+    console.log("State changed")
+}
 export type FriendsType = {
     name: string
     age: number
@@ -100,6 +101,10 @@ export let updateNewPostText = (newText: string) => {
 export let updateNewMessageText = (newMessage: string) => {
     state.dialogsPage.newMessageText = newMessage;
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer: (state:RootStateType ) => void) => {
+    rerenderEntireTree = observer;
 }
 
 export default state;

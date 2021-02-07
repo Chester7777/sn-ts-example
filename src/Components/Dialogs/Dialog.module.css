@@ -3,7 +3,7 @@
     grid-template-columns: 2fr 10fr;
 }
 
-.dialogsItems .dialog {
+.dialogsItems .dialogs {
     padding: 10px;
     color: red;
 }

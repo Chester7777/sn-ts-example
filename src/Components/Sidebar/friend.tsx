@@ -8,7 +8,7 @@ type PropsType = {
 
 
 const Friend: React.FC<PropsType> = (props) => {
-debugger;
+
     return(
         <div>
             {props.friends[0].name}
