@@ -1,5 +1,5 @@
 import React from "react";
-import {addMessagesActionCreator, onMessageChangeActionCreator} from "../../redux/dialogsPage-reducer";
+import {addMessagesActionCreator, DialogsPageType, onMessageChangeActionCreator} from "../../redux/dialogsPage-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AllAppStateType} from "../../redux/Redux-store";
@@ -31,13 +31,24 @@ import {Dispatch} from "redux";
 //     )
 // }
 
+
+type MapStateToPropsType = {
+    dialogsPage: DialogsPageType
+}
+type mapDispatchToPropsType = {
+    addMessages: () => void
+    onMessageChange: (body: string) => void
+
+}
+export type DialogsPropsType = MapStateToPropsType & mapDispatchToPropsType
+
 // подключили react-redux
-let mapStateToProps = (state: AllAppStateType) => {
+let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         addMessages: () => dispatch(addMessagesActionCreator()),
         onMessageChange: (body: string) => dispatch(onMessageChangeActionCreator(body))

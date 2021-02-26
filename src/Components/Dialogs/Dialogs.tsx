@@ -1,18 +1,11 @@
-import React, {RefObject} from "react";
-import { DialogsPageType } from "../../redux/dialogsPage-reducer";
+import React from "react";
 import s from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
-
-type PropsType = {
-    addMessages: () => void
-    onMessageChange: (body: string) => void
-    dialogsPage: DialogsPageType
-}
-
-const Dialogs: React.FC<PropsType> = (props) => {
+const Dialogs = (props: DialogsPropsType) => {
 
     let messagesElement = React.createRef<HTMLTextAreaElement>();
 

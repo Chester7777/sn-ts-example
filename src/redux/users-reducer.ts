@@ -1,4 +1,3 @@
-import React from "react";
 import {ActionType} from "./store";
 
 
@@ -28,7 +27,7 @@ let initialState: InitialStateType = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const usersReducer = (state = initialState, action: ActionType) => {
+const usersReducer = (state:InitialStateType = initialState, action: ActionType):InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -67,6 +66,6 @@ const usersReducer = (state = initialState, action: ActionType) => {
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
-export const setUserAC = (users: UsersType) => ({type: SET_USER,  users} as const)
+export const setUserAC = (users: Array<UsersType>) => ({type: SET_USER,  users} as const)
 
 export default usersReducer;

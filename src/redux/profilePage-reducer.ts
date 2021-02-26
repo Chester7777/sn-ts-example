@@ -1,24 +1,27 @@
-import {ActionType, PostsType} from "./store";
+import {ActionType} from "./store";
 
-export type ProfilePageType = {
-    posts: Array<PostsType>
-    newPostText: string
-}
+
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
+export type PostsType = {
+    id: number
+    message: string
+    likes: string
+}
+export type InitialStateType = typeof initialState
 // обьект initialState задает начальное значение state, если он не придет сразу
 let initialState = {
     posts: [
         {id: 1, message: "Hey, why nobody love me", likes: "15"},
         {id: 2, message: "It`s our new program! Hey", likes: "20"},
-    ],
+    ] as Array<PostsType>,
     newPostText: ""
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const profilePageReducer = (state: ProfilePageType = initialState, action: ActionType) => {
+const profilePageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {

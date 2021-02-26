@@ -1,4 +1,4 @@
-import {ActionType, DialogsType, MessagesType} from "./store";
+import {ActionType} from "./store";
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
@@ -8,7 +8,16 @@ export type DialogsPageType = {
     messages: Array<MessagesType>
     newMessageText: string
 }
+export type DialogsType = {
+    id: number
+    name: string
+}
+export type MessagesType = {
+    id: number
+    messages: string
+}
 
+export type initialStateType = typeof initialState
 
 // обьект initialState задает начальное значение state, если он не придет сразу
 let initialState: DialogsPageType = {
@@ -19,17 +28,17 @@ let initialState: DialogsPageType = {
         {id: 4, name: "Milana"},
         {id: 5, name: "Katy"},
         {id: 6, name: "Andrey"},
-    ],
+    ] as Array<DialogsType>,
     messages: [
         {id: 1, messages: "Hi"},
         {id: 2, messages: "How is your It-kamasutra?"},
         {id: 3, messages: "Yo"},
-    ],
+    ] as Array<MessagesType>,
     newMessageText: "",
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionType): DialogsPageType => {
+const dialogsPageReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let body = state.newMessageText;

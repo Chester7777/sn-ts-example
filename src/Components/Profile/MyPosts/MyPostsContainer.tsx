@@ -4,6 +4,7 @@ import MyPosts from "./MyPosts"
 import {connect} from "react-redux";
 import {AllAppStateType} from "../../../redux/Redux-store";
 import {Dispatch} from "redux";
+import {PostsType, ProfilePageType} from "../../../redux/store";
 
 //самодельный контейнер
 // type MyPostsType = {
@@ -35,14 +36,26 @@ import {Dispatch} from "redux";
 //     )
 // }
 
+
+type MapStateToPropsType = {
+    newPostText: string
+    posts: Array<PostsType>
+}
+type mapDispatchToPropsType = {
+    onPostChangeActionCreator: (text: string) => void
+    addPosts: () => void
+
+}
+export type MyPostsPropsType = MapStateToPropsType & mapDispatchToPropsType
+
 // подключили react-redux
-let mapStateToProps = (state: AllAppStateType) => {
+let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
         onPostChangeActionCreator: (text: string) => {
             let action = onPostChangeActionCreator(text)
