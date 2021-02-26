@@ -1,9 +1,11 @@
 .post {
     padding: 11px;
+    position: absolute;
 }
 
 .myPosts {
     margin: 10px;
+    position: absolute;
 }
 
 .button {

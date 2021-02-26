@@ -1,5 +1,6 @@
 
 
-.addTextButton {
-    size: 10px;
+.message {
+    size: 100px;
+    color: black;
 }

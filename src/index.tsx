@@ -2,35 +2,28 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import state, {subscribe} from "./redux/state";
-import "./index.css";
 import App from "./App";
-import {addMessage, addPost, RootStateType, updateNewMessageText, updateNewPostText} from "./redux/state";
+import {Provider} from "react-redux";
+import store from "./redux/Redux-store";
 
-type addPostType = {
-    addPost: () => void
-    addMessage: () => void
-    updateNewPostText: (newText: string) => void
-    updateNewMessageText: (newMessage: string) => void
-    newMessageText: string
-}
-export let rerenderEntireTree = (state: RootStateType) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <App
-                state={state}
-                addPost={addPost}
-                addMessage={addMessage}
-                updateNewPostText={updateNewPostText}
-                updateNewMessageText={updateNewMessageText}
-                newMessageText={state.dialogsPage.newMessageText}
-            />
-        </React.StrictMode>,
-        document.getElementById("root")
-    );
-}
+ReactDOM.render(
+    // обернули APP что бы наши страницы переключались без перезагрузки
+    <React.StrictMode>
+        <Provider store={store}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById("root")
+);
 
-rerenderEntireTree(state);
-subscribe(rerenderEntireTree);
+
+// эта компонента отрисовывает мое приложение
+// export let rerenderEntireTree = () => {
+//
+// }
+// rerenderEntireTree();
+
+
+// store.subscribe(rerenderEntireTree);
 
 reportWebVitals();

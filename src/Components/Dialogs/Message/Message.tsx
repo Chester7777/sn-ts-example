@@ -1,40 +1,43 @@
 import React from "react";
 import s from "./../Dialog.module.css";
+import {ActionType, RootStateType} from "../../../redux/store";
 
 
 type MessagesType = {
+     id: number
+
     messages: string
-    id: number
-    addMessage: () => void
-    newMessageText: string
-    updateNewMessageText: (newMessage: string) => void
+    // newMessageText: string
 }
+
+
+
 
 const Message: React.FC<MessagesType> = (props) => {
 
-    let messagesElement = React.createRef<HTMLTextAreaElement>();
-
-    let addMessages = () => {
-       props.addMessage();
-    }
-
-    let onMessageChange = () => {
-        if (messagesElement.current) {
-            props.updateNewMessageText(messagesElement.current.value);
-        }
-    }
+    // let messagesElement = React.createRef<HTMLTextAreaElement>();
+    //
+    // let addMessages = () => {
+    //    props.dispatch(addMessagesActionCreator());
+    // }
+    //
+    // let onMessageChange = () => {
+    //     if (messagesElement.current) {
+    //         props.dispatch(onMessageChangeActionCreator(messagesElement.current.value));
+    //     }
+    // }
 
     return (
-        <div className={s.messages}>
+        <div>
             <div className={s.message}>{props.messages}</div>
-            <div>
-                <div className={s.addText}>
-                    <textarea onChange={onMessageChange} ref={messagesElement} value={props.newMessageText}/>
-                </div>
-                <div className={s.addTextButton}>
-                    <button onClick={addMessages}></button>
-                </div>
-            </div>
+            {/*<div>*/}
+            {/*    /!*<div className={s.addText}>*!/*/}
+            {/*    /!*    <textarea onChange={onMessageChange} ref={messagesElement} value={props.newMessageText}/>*!/*/}
+            {/*    /!*</div>*!/*/}
+            {/*    /!*<div className={s.addTextButton}>*!/*/}
+            {/*    /!*    <button onClick={addMessages}></button>*!/*/}
+            {/*    /!*</div>*!/*/}
+            {/*</div>*/}
         </div>
     )
 }

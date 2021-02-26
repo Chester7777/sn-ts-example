@@ -9,16 +9,23 @@
 }
 
 .dialogsItems .active {
+    display: flex;
     color: gold;
     padding: 0 30px 2px 36px;
-    margin: 0;
+    /*margin: 0;*/
 
 }
 
 
 .messages {
-    padding: 2px;
-    color: red;
+
+    padding: 10px;
+    color: crimson;
+
+}
+.addText {
+
+    padding: 10px;
 }
 
 
@@ -36,4 +43,5 @@
 
 /*.addTextButton {*/
 /*    size: 10px;*/
+/*    position: sticky;*/
 /*}*/

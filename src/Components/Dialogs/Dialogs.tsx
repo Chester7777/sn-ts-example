@@ -1,26 +1,40 @@
-import React from "react";
-import {addMessage, DialogsPageType, MessagesType} from "../../redux/state";
-import s from "./Dialog.module.css";
+import React, {RefObject} from "react";
+import { DialogsPageType } from "../../redux/dialogsPage-reducer";
+import s from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 
+
 type PropsType = {
+    addMessages: () => void
+    onMessageChange: (body: string) => void
     dialogsPage: DialogsPageType
-    addMessage: () => void
-    updateNewMessageText: (newMessage: string) => void
-    newMessageText: string
 }
 
 const Dialogs: React.FC<PropsType> = (props) => {
 
-    const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
-    const messagesElement = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}
-                                                                           addMessage={props.addMessage} updateNewMessageText={props.updateNewMessageText} newMessageText={props.newMessageText}/>)
+    let messagesElement = React.createRef<HTMLTextAreaElement>();
 
+    const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
+    const messagesElements = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}  />)
+
+    let addMessages = () => {
+        props.addMessages()
+    }
+
+    let onMessageChange = () => {
+        if (messagesElement.current) {
+            let body = messagesElement.current.value
+            props.onMessageChange(body)
+        }
+    }
 
     return (
-        <div className={s.dialogs}>
+        <div >
+            <h3>Massages</h3>
+
+            <div className={s.dialogs}>
             <div className={s.dialogsItems + " " + s.active}>
                 <img src="https://i.pinimg.com/originals/9a/da/3b/9ada3bc305a1f45eab527f60da172d53.png" alt=""/>
                 <img
@@ -38,9 +52,24 @@ const Dialogs: React.FC<PropsType> = (props) => {
                     alt=""/>
                 {dialogsElements}
             </div>
-            <div className={s.messages}>
-                {messagesElement}
+
+                <div className={s.messages}>
+                    <div className={s.addText}>
+                        <textarea onChange={onMessageChange} ref={messagesElement}
+                                  value={props.dialogsPage.newMessageText}/>
+                    </div>
+
+                    <div className={s.addTextButton}>
+                        <button onClick={addMessages}>+</button>
+                    </div>
+                    {messagesElements}
+                </div>
             </div>
+
+            {/*<div className={s.messages}>*/}
+
+            {/*</div>*/}
+
         </div>
     )
 }
