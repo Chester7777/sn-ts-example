@@ -10,13 +10,27 @@ export type InitialStateType = {
 }
 
 export type UsersType = {
+    "name": string
+    "id": number
+    "uniqueUrlName": string | null
+    "photos": {
+        "small": string | null
+        "large": string | null
+    },
+    "status": string | null
+    "followed": boolean
+}
+
+/*export type UsersType = {
     id: number
     photoUrl: string
     followed: boolean
     fullName: string
     status: string
     location: CountryType
-}
+}*/
+
+
 type CountryType = {
     country: string
     citi: string
@@ -32,7 +46,7 @@ const usersReducer = (state:InitialStateType = initialState, action: ActionType)
         case FOLLOW:
             return {
                 ...state,
-                // users: [...state.users],
+                //users: [...state.users],
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
                         return {...u, followed: true}
@@ -49,7 +63,7 @@ const usersReducer = (state:InitialStateType = initialState, action: ActionType)
                 if (u.id === action.userId) {
                     return {...u, followed: false}
                 }
-                return u;
+               return u;
             })
         }
         case SET_USER:
