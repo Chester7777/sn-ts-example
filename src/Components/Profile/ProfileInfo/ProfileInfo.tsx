@@ -1,5 +1,6 @@
 import React from "react";
 import s from "./ProfileInfo.module.css"
+import MyPostsContainer from "../MyPosts/MyPostsContainer";
 
 
 
@@ -12,7 +13,7 @@ const ProfileInfo = () => {
                     alt="content"/>
             </div>
             <div className={s.description}>
-                ava + description
+               <span>ava + description</span>
             </div>
         </div>
     )
