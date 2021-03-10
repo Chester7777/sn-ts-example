@@ -3,6 +3,12 @@
 }
 
 .image {
-    background: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzr0R9ziCVWDGq7tD8jO-FhKrY_KxfqpxW1g&usqp=CAU) 100%;
 
+}
+
+.image_backgraund {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 200px;
 }
