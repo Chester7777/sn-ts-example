@@ -1,7 +1,7 @@
 import sidebarReducer from "./sidebar-reducer";
 import profilePageReducer, {addPostsActionCreator, onPostChangeActionCreator} from "./profilePage-reducer";
 import dialogsPageReducer, {addMessagesActionCreator, onMessageChangeActionCreator} from "./dialogsPage-reducer";
-import {followAC, setUserAC, unfollowAC} from "./users-reducer";
+import {followAC, setCurrentPageAC, setUserAC, setUsersTotalCountAC, unfollowAC} from "./users-reducer";
 
 export type FriendsType = {
     name: string
@@ -59,7 +59,10 @@ export type ActionType =
     ReturnType<typeof onMessageChangeActionCreator> |
     ReturnType<typeof followAC> |
     ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUserAC>
+    ReturnType<typeof setUserAC> |
+    ReturnType<typeof setCurrentPageAC> |
+    ReturnType<typeof setUsersTotalCountAC>
+
 
 
 export let store: StoreType = {

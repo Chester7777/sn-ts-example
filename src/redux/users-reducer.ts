@@ -4,9 +4,16 @@ import {ActionType} from "./store";
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USER = "SET_USER";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 export type InitialStateType = {
     users: Array<UsersType>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 export type UsersType = {
@@ -37,11 +44,15 @@ type CountryType = {
 }
 // обьект initialState задает начальное значение state, если он не придет сразу
 let initialState: InitialStateType = {
-    users: [ ],
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const usersReducer = (state:InitialStateType = initialState, action: ActionType):InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -56,21 +67,28 @@ const usersReducer = (state:InitialStateType = initialState, action: ActionType)
 
             }
         case UNFOLLOW:
-        return {
-            ...state,
-            // users: [...state.users]
-            users: state.users.map(u => {
-                if (u.id === action.userId) {
-                    return {...u, followed: false}
-                }
-               return u;
-            })
-        }
-        case SET_USER:
             return {
                 ...state,
-                users: [...state.users, ...action.users]
+                // users: [...state.users]
+                users: state.users.map(u => {
+                    if (u.id === action.userId) {
+                        return {...u, followed: false}
+                    }
+                    return u;
+                })
             }
+        case SET_USER: {
+            return {...state, users: action.users}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_COUNT: {
+            return {...state, totalUsersCount: action.count}
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching}
+        }
 
         default:
             return state;
@@ -80,6 +98,9 @@ const usersReducer = (state:InitialStateType = initialState, action: ActionType)
 
 export const followAC = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowAC = (userId: number) => ({type: UNFOLLOW, userId} as const)
-export const setUserAC = (users: Array<UsersType>) => ({type: SET_USER,  users} as const)
+export const setUserAC = (users: Array<UsersType>) => ({type: SET_USER, users} as const)
+export const setCurrentPageAC = (currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const)
+export const setUsersTotalCountAC = (totalUsersCount: number) => ({type: SET_TOTAL_COUNT, count: totalUsersCount} as const)
+export const setIsFetchingAC= (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const)
 
 export default usersReducer;
