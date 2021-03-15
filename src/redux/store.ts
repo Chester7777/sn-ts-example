@@ -1,7 +1,18 @@
 import sidebarReducer from "./sidebar-reducer";
-import profilePageReducer, {addPostsActionCreator, onPostChangeActionCreator} from "./profilePage-reducer";
+import profilePageReducer, {
+    addPostsActionCreator,
+    onPostChangeActionCreator,
+    setUserProfile
+} from "./profilePage-reducer";
 import dialogsPageReducer, {addMessagesActionCreator, onMessageChangeActionCreator} from "./dialogsPage-reducer";
-import {followAC, setCurrentPageAC, setUserAC, setUsersTotalCountAC, unfollowAC} from "./users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setUsers,
+    setTotalUsersCount,
+    unfollow
+} from "./users-reducer";
 
 export type FriendsType = {
     name: string
@@ -57,11 +68,13 @@ export type ActionType =
     ReturnType<typeof addMessagesActionCreator> |
     ReturnType<typeof onPostChangeActionCreator> |
     ReturnType<typeof onMessageChangeActionCreator> |
-    ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUserAC> |
-    ReturnType<typeof setCurrentPageAC> |
-    ReturnType<typeof setUsersTotalCountAC>
+    ReturnType<typeof follow> |
+    ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> |
+    ReturnType<typeof setIsFetching> |
+    ReturnType<typeof setUserProfile>
 
 
 
@@ -109,7 +122,6 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        debugger
         this._state.profilePage = profilePageReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);

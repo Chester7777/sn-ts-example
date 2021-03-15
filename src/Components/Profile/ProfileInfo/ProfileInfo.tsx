@@ -1,10 +1,15 @@
 import React from "react";
 import s from "./ProfileInfo.module.css"
 import MyPostsContainer from "../MyPosts/MyPostsContainer";
+import Preloader from "../../Common/Preloader/Preloader";
 
 
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+    if(!props.profile) {
+        return <Preloader />
+    }
+
     return (
         <div>
             <div className={s.image}>
@@ -13,6 +18,7 @@ const ProfileInfo = () => {
                     className={s.image_backgraund}/>
             </div>
             <div className={s.description}>
+                <img src={props.profile.photos.large} />
                <span>ava + description</span>
             </div>
         </div>

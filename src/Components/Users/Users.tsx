@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
 import {OnPageChangedType, UsersPropsType} from "./UsersContainer";
+import {NavLink} from "react-router-dom"
 
 
 type PropsType = OnPageChangedType & UsersPropsType
@@ -31,7 +32,9 @@ let Users = (props: PropsType) => {
                     return <div key={u.id}>
                     <span>
                         <div>
+                            <NavLink to={"./profile/" + u.id}>
                             <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}/>
+                            </NavLink>
                         </div>
                         <div>
                             {u.followed
