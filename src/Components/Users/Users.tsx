@@ -2,11 +2,19 @@ import React from "react";
 import s from "./Users.module.css";
 import {UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
-import {OnPageChangedType, UsersPropsType} from "./UsersContainer";
 import {NavLink} from "react-router-dom"
 
 
-type PropsType = OnPageChangedType & UsersPropsType
+type PropsType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<UsersType>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+}
+
 
 let Users = (props: PropsType) => {
     let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -23,7 +31,8 @@ let Users = (props: PropsType) => {
                     key={p}
                     className={props.currentPage === p ? s.selectedPage : ""}
                     onClick={(e) => props.onPageChanged(p)}
-                >{p}</span>})}
+                >{p}</span>
+            })}
         </div>
         {/*использовал до componentDidMount*/}
         {/*<button onClick={this.props.getUsers}>get users</button>*/}

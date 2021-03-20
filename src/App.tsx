@@ -8,7 +8,9 @@ import News from "./Components/News/news";
 import Profile from "./Components/Profile/Profile";
 import Setting from "./Components/Setting/Setting";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+
 
 type AppType = {}
 

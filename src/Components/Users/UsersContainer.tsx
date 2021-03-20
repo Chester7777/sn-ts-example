@@ -38,12 +38,12 @@ export type GetTasksResponseType = {
     totalCount: number
     error: string | null
 }
-export type OnPageChangedType = {
-    onPageChanged: (pageNumber: number) => void
-}
+// export type OnPageChangedType = {
+//     onPageChanged: (pageNumber: number) => void
+// }
 
 
-export class UsersContainer extends React.Component<UsersPropsType & OnPageChangedType> {
+class UsersContainer extends React.Component<UsersPropsType> {
 
     componentDidMount() {
         this.props.setIsFetching(true)
@@ -66,7 +66,7 @@ export class UsersContainer extends React.Component<UsersPropsType & OnPageChang
     render() {
 
         return <>
-            {this.props.isFetching ?  <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
 
             <Users
                 totalUsersCount={this.props.totalUsersCount}

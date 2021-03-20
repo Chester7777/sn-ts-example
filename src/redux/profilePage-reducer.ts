@@ -12,6 +12,31 @@ export type PostsType = {
     message: string
     likes: string
 }
+type ContactsType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    mainLink: null
+}
+type PhotosType = {
+    small: string,
+    large: string
+}
+export type ProfilePropsType = {
+    aboutMe: string,
+    contacts: ContactsType,
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": PhotosType
+}
+
+
 export type InitialStateType = typeof initialState
 // обьект initialState задает начальное значение state, если он не придет сразу
 let initialState = {
@@ -20,7 +45,7 @@ let initialState = {
         {id: 2, message: "It`s our new program! Hey", likes: "20"},
     ] as Array<PostsType>,
     newPostText: "",
-    profile: {}
+    profile: {} as ProfilePropsType
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
@@ -53,7 +78,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Acti
 
 }
 export const addPostsActionCreator = () => ({type: ADD_POST} as const)
-export const setUserProfile = (profile: UsersType) => ({type: SET_USER_PROFILE, profile} as const)
+export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PROFILE, profile} as const)
 export const onPostChangeActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText} as const)
 
 

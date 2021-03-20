@@ -28,15 +28,6 @@ export type UsersType = {
     "followed": boolean
 }
 
-/*export type UsersType = {
-    id: number
-    photoUrl: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: CountryType
-}*/
-
 
 type CountryType = {
     country: string

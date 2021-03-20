@@ -1,13 +1,15 @@
 import React from "react";
 import s from "./ProfileInfo.module.css"
-import MyPostsContainer from "../MyPosts/MyPostsContainer";
 import Preloader from "../../Common/Preloader/Preloader";
+import {ProfilePropsType} from "../../../redux/profilePage-reducer";
 
+type ProfileInfoPropsType = {
+    profile: ProfilePropsType
+}
 
-
-const ProfileInfo = (props) => {
-    if(!props.profile) {
-        return <Preloader />
+const ProfileInfo = (props: ProfileInfoPropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
     }
 
     return (
@@ -18,8 +20,8 @@ const ProfileInfo = (props) => {
                     className={s.image_backgraund}/>
             </div>
             <div className={s.description}>
-                <img src={props.profile.photos.large} />
-               <span>ava + description</span>
+                <img src={props.profile.photos.large}/>
+                <span>ava + description</span>
             </div>
         </div>
     )
