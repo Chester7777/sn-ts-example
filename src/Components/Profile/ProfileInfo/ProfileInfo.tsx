@@ -20,7 +20,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
                     className={s.image_backgraund}/>
             </div>
             <div className={s.description}>
-                <img src={props.profile.photos.large}/>
+                <img src={props.profile.photos?.large}/>
                 <span>ava + description</span>
             </div>
         </div>

@@ -1,6 +1,15 @@
 import {addPostsActionCreator, onPostChangeActionCreator, setUserProfile} from "./profilePage-reducer";
 import {addMessagesActionCreator, onMessageChangeActionCreator} from "./dialogsPage-reducer";
-import {follow, setCurrentPage, setIsFetching, setTotalUsersCount, setUsers, unfollow} from "./users-reducer";
+import {
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setIsFollowingProgress,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
+} from "./users-reducer";
+import {setAuthUserData} from "./auth-reducer";
 
 export type FriendsType = {
     name: string
@@ -62,7 +71,10 @@ export type ActionType =
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> |
     ReturnType<typeof setIsFetching> |
-    ReturnType<typeof setUserProfile>
+    ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof setIsFollowingProgress>
+
 
 
 // export let store: StoreType = {

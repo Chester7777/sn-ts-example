@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
-import Header from "./Components/Header/Header";
 import Music from "./Components/Music/Music";
 import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/news";
@@ -10,6 +9,7 @@ import Setting from "./Components/Setting/Setting";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
+import HeaderContainer from "./Components/Header/HeaderContainer"
 
 
 type AppType = {}
@@ -20,13 +20,13 @@ const App: React.FC<AppType> = () => {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
-                <Header/>
+                <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
 
                     {/*Route - реактовская компонента, которая при совпадении с ее path позовет колбэк находящийся в ней*/}
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/profile/: userId" render={() => <ProfileContainer/>}/>
+                    <Route path="/profile/:userId" render={() => <ProfileContainer/>}/>
                     <Route path="/news" render={() => <News/>}/>
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Setting/>}/>
