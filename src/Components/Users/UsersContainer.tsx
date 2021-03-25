@@ -2,6 +2,7 @@ import {connect} from "react-redux";
 import {AllAppStateType} from "../../redux/Redux-store";
 import {
     follow,
+    getUsersThunkCreator,
     setCurrentPage,
     setIsFetching,
     setIsFollowingProgress,
@@ -49,23 +50,31 @@ export type GetTasksResponseType = {
 
 class UsersContainer extends React.Component<UsersPropsType> {
 
-    componentDidMount() {
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(data.items)
-            this.props.setTotalUsersCount(data.totalCount)
-        })
-    }
+    //подключаем thunkCreator (санки)
+componentDidMount() {
+    this.props.getUsers(this.props.currentPage, this.props.pageSize)
+}
+    // componentDidMount() {
+    //     this.props.setIsFetching(true)
+    //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+    //         this.props.setIsFetching(false)
+    //         this.props.setUsers(data.items)
+    //         this.props.setTotalUsersCount(data.totalCount)
+    //     })
+    // }
 
+    //подключаем thunkCreator (санки)
     onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        this.props.setIsFetching(true)
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.setIsFetching(false)
-            this.props.setUsers(data.items)
-        })
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
+    // onPageChanged = (pageNumber: number) => {
+    //     this.props.setCurrentPage(pageNumber);
+    //     this.props.setIsFetching(true)
+    //     usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+    //         this.props.setIsFetching(false)
+    //         this.props.setUsers(data.items)
+    //     })
+    // }
 
     render() {
 
@@ -80,7 +89,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                followingInProgress={this.props.followingInProgress}
+                // followingInProgress={this.props.followingInProgress}
                 setIsFollowingProgress={this.props.setIsFollowingProgress}
             />
         </>
@@ -127,9 +136,10 @@ export default connect(mapStateToProps,
     {
         follow,
         unfollow,
-        setUsers,
+        // setUsers,
         setCurrentPage,
-        setTotalUsersCount,
-        setIsFetching,
-        setIsFollowingProgress
+        // setTotalUsersCount,
+        // setIsFetching,
+        setIsFollowingProgress,
+        getUsers: getUsersThunkCreator
     })(UsersContainer);

@@ -15,15 +15,18 @@ export const usersAPI = {
         return instance.get<GetTasksResponseType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
-    deleteUsers(id: number) {
-       return  instance.delete(`follow/${id}`).then(response => response.data)
+    unfollow(id: number) {
+       return  instance.delete(`follow/${id}`)
+           // .then(response => response.data)
     },
-    postUsers(id: number) {
-       return  instance.post<PostPropsType>(`follow/${id}`).then(response => response.data)
+    follow(id: number) {
+       return  instance.post<PostPropsType>(`follow/${id}`)
+           // .then(response => response.data)
     },
     getAuth () {
         return instance.get<PostPropsType>(`auth/me`).then(response => response.data)
-    }
+    },
+
 }
 //id: number, email: string, login: string, isAuth: boolean
 
