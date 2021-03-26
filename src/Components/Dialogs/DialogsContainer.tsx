@@ -3,7 +3,8 @@ import {addMessagesActionCreator, DialogsPageType, onMessageChangeActionCreator}
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AllAppStateType} from "../../redux/Redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
+import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 
 //самодельный контейнер
 // type PropsType = {
@@ -34,7 +35,6 @@ import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
     dialogsPage: DialogsPageType
-    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     addMessages: () => void
@@ -47,7 +47,6 @@ export type DialogsPropsType = MapStateToPropsType & mapDispatchToPropsType
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
@@ -57,9 +56,17 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     }
 }
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
 
-export default DialogsContainer;
+//HOC создает контейненрную компаненту вокруг ProfileContainer
+// const AuthRedirectComponent = withAuthRedirect(Dialogs)
+//
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
+//
+// export default DialogsContainer;
 
 
 

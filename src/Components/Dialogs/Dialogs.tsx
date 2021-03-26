@@ -23,7 +23,6 @@ const Dialogs = (props: DialogsPropsType) => {
             props.onMessageChange(body)
         }
     }
-    if(!props.isAuth) return <Redirect to="/login"/>
     return (
         <div>
             <h3>Massages</h3>

@@ -2,20 +2,22 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {getUserProfile, ProfilePropsType} from "../../redux/profilePage-reducer";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom"
+import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
+import {withAuthRedirect} from "../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 type PathParamsType = {
     userId: string
 }
 type MapStatePropsType = {
     profile: ProfilePropsType
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void
 }
 type PropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
+
 // React.ComponentClass<Pick<PropsType, "profile" | "getUserProfile">, any> & WithRouterStatics<typeof ProfileContainer>
 
 
@@ -29,7 +31,6 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
-        if(!this.props.isAuth) return <Redirect to="/login" />
         return (
             <div>
                 <Profile {...this.props} />
@@ -38,15 +39,23 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
+
 let mapStateToProps = (state: AllAppStateType): MapStatePropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
 })
 
+//обертка compose
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
+
+//HOC создает контейненрную компаненту вокруг ProfileContainer
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
 //передает компаненте данные из URL
-
-let WithUrlDataContainerComponent = withRouter(ProfileContainer);
-
+// let WithUrlDataContainerComponent = withRouter(AuthRedirectComponent);
 
 //передает в компаненту данные из store
-export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
+// export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
