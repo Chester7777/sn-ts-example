@@ -1,5 +1,3 @@
-import {ActionType, SidebarType} from "./store";
-
 export type FriendsType = {
     id: number
     age: number
@@ -17,7 +15,7 @@ let initialState = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const sidebarReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+const sidebarReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
 
     return state;
 }

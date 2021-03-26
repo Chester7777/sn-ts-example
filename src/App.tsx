@@ -10,6 +10,7 @@ import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer"
+import Login from "./Components/Login/Login";
 
 
 type AppType = {}
@@ -23,7 +24,6 @@ const App: React.FC<AppType> = () => {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className="app-wrapper-content">
-
                     {/*Route - реактовская компонента, которая при совпадении с ее path позовет колбэк находящийся в ней*/}
                     <Route path="/dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/profile/:userId" render={() => <ProfileContainer/>}/>
@@ -31,6 +31,7 @@ const App: React.FC<AppType> = () => {
                     <Route path="/music" render={() => <Music/>}/>
                     <Route path="/settings" render={() => <Setting/>}/>
                     <Route path="/users" render={() => <UsersContainer/>}/>
+                    <Route path="/login" render={() => <Login/>}/>
                 </div>
             </div>
         </BrowserRouter>

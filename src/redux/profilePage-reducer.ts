@@ -1,6 +1,5 @@
-import {ActionType} from "./store";
-import {UsersType} from "./users-reducer";
-
+import {usersAPI} from "../API/API";
+import {Dispatch} from "redux";
 
 
 const ADD_POST = "ADD-POST";
@@ -29,11 +28,11 @@ type PhotosType = {
 export type ProfilePropsType = {
     aboutMe: string,
     contacts: ContactsType,
-    "lookingForAJob": boolean,
-    "lookingForAJobDescription": string,
-    "fullName": string,
-    "userId": number,
-    "photos": PhotosType
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: PhotosType
 }
 
 
@@ -49,7 +48,7 @@ let initialState = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const profilePageReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+const profilePageReducer = (state: InitialStateType = initialState, action: ProfileActionType): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost = {
@@ -81,5 +80,17 @@ export const addPostsActionCreator = () => ({type: ADD_POST} as const)
 export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PROFILE, profile} as const)
 export const onPostChangeActionCreator = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText: newText} as const)
 
+export const getUserProfile = (userId: number) => (dispatch: Dispatch) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data));
+    })
+}
+
+
+
+type ProfileActionType =
+    ReturnType<typeof addPostsActionCreator> |
+    ReturnType<typeof onPostChangeActionCreator> |
+    ReturnType<typeof setUserProfile>
 
 export default profilePageReducer;

@@ -1,5 +1,3 @@
-import {ActionType} from "./store";
-
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
@@ -38,7 +36,7 @@ let initialState: DialogsPageType = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const dialogsPageReducer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+const dialogsPageReducer = (state: initialStateType = initialState, action: DialogsPageActionType): initialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let body = state.newMessageText;
@@ -65,3 +63,8 @@ export const onMessageChangeActionCreator = (newMessage: string) => ({
 } as const)
 
 export default dialogsPageReducer;
+
+type DialogsPageActionType =
+
+    ReturnType<typeof addMessagesActionCreator> |
+    ReturnType<typeof onMessageChangeActionCreator>

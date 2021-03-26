@@ -1,4 +1,3 @@
-import {ActionType} from "./store";
 import {usersAPI} from "../API/API";
 import {Dispatch} from "redux";
 
@@ -48,7 +47,7 @@ let initialState: InitialStateType = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const usersReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+const usersReducer = (state: InitialStateType = initialState, action: UsersActionType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -99,6 +98,7 @@ const usersReducer = (state: InitialStateType = initialState, action: ActionType
     }
 }
 
+export default usersReducer;
 
 export const followSuccess = (userId: number) => ({type: FOLLOW, userId} as const)
 export const unfollowSuccess = (userId: number) => ({type: UNFOLLOW, userId} as const)
@@ -114,7 +114,16 @@ export const setIsFollowingProgress = (isFetching: boolean, userId: number) => (
     isFetching, userId
 } as const)
 
-export default usersReducer;
+export type UsersActionType =
+    ReturnType<typeof followSuccess> |
+    ReturnType<typeof unfollowSuccess> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> |
+    ReturnType<typeof setIsFetching> |
+    ReturnType<typeof setIsFollowingProgress>
+
+
 
 export type GetUsersThunkCreatorType = {
     currentPage: number

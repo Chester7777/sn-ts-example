@@ -3,8 +3,7 @@ import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
 import Header from "./Header";
-import {setAuthUserData} from "../../redux/auth-reducer";
-import {usersAPI} from "../../API/API";
+import {getAuthUserData} from "../../redux/auth-reducer";
 
 type PathParamsType = {
     userId: string
@@ -15,7 +14,7 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    setAuthUserData: (userId: number | null, email: string | null, login: string | null, isAuth: boolean) => void
+    getAuthUserData: () => void
 }
 
 
@@ -25,6 +24,7 @@ type DataPropsType = {
     id: number
     email: string
     login: string
+    isAuth: boolean
 }
 type PostPropsType = {
     data: DataPropsType
@@ -34,13 +34,7 @@ type PostPropsType = {
 
 class HeaderContainer extends React.Component<PropsType> {
     componentDidMount() {
-
-        usersAPI.getAuth().then(data => {
-            if(data.resultCode === 0) {
-                let {userId, email, login, isAuth} = data.data
-                this.props.setAuthUserData(userId, email, login, isAuth)
-            }
-        })
+        this.props.getAuthUserData()
     }
 
     render() {
@@ -63,4 +57,4 @@ let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
 
 //передает в компаненту данные из store
-export default connect<any,any,any,any>(mapStateToProps, {setAuthUserData})(WithUrlDataContainerComponent);
+export default connect<any,any,any,any>(mapStateToProps, {getAuthUserData})(WithUrlDataContainerComponent);

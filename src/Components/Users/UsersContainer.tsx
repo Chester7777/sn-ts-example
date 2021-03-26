@@ -4,17 +4,13 @@ import {
     follow,
     getUsersThunkCreator,
     setCurrentPage,
-    setIsFetching,
     setIsFollowingProgress,
-    setTotalUsersCount,
-    setUsers,
     unfollow,
     UsersType
 } from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {usersAPI} from "../../API/API";
 
 
 type MapStateToPropsType = {
@@ -29,11 +25,12 @@ type MapStateToPropsType = {
 type mapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: Array<UsersType>) => void
+    // setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageNumber: number) => void
-    setTotalUsersCount: (totalCount: number) => void
-    setIsFetching: (isFetching: boolean) => void
+    // setTotalUsersCount: (totalCount: number) => void
+    // setIsFetching: (isFetching: boolean) => void
     setIsFollowingProgress: (isFetching: boolean, userId: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 
 }
 export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
@@ -51,9 +48,10 @@ export type GetTasksResponseType = {
 class UsersContainer extends React.Component<UsersPropsType> {
 
     //подключаем thunkCreator (санки)
-componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pageSize)
-}
+    componentDidMount() {
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+    }
+
     // componentDidMount() {
     //     this.props.setIsFetching(true)
     //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
@@ -77,10 +75,8 @@ componentDidMount() {
     // }
 
     render() {
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
-
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
@@ -89,8 +85,8 @@ componentDidMount() {
                 users={this.props.users}
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
-                // followingInProgress={this.props.followingInProgress}
-                setIsFollowingProgress={this.props.setIsFollowingProgress}
+                followingInProgress={this.props.followingInProgress}
+                // setIsFollowingProgress={this.props.setIsFollowingProgress}
             />
         </>
     }

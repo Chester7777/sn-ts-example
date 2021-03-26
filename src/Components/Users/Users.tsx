@@ -3,7 +3,6 @@ import s from "./Users.module.css";
 import {UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
 import {NavLink} from "react-router-dom"
-import {usersAPI} from "../../API/API";
 
 
 type PropsType = {
@@ -14,8 +13,8 @@ type PropsType = {
     users: Array<UsersType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setIsFollowingProgress: (isFetching: boolean, userId: number) => void
-    // followingInProgress: Array<number>
+    // setIsFollowingProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: Array<number>
     // resultCode: number
 }
 type PostPropsType = {

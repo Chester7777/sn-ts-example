@@ -48,32 +48,32 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
 }
 
-export type StoreType = {
-    _state: RootStateType
-    _callSubscribe: () => void
-    getState: () => RootStateType
-    subscribe: (observer: () => void) => void
-    dispatch: (action: ActionType) => void
-}
+// export type StoreType = {
+//     _state: RootStateType
+//     _callSubscribe: () => void
+//     getState: () => RootStateType
+//     subscribe: (observer: () => void) => void
+//     dispatch: (action: ActionType) => void
+// }
 
-type ProfilePageReducerPropsType = {
-    state: DialogsPageType
-    action: ActionType
-}
-export type ActionType =
-    ReturnType<typeof addPostsActionCreator> |
-    ReturnType<typeof addMessagesActionCreator> |
-    ReturnType<typeof onPostChangeActionCreator> |
-    ReturnType<typeof onMessageChangeActionCreator> |
-    ReturnType<typeof follow> |
-    ReturnType<typeof unfollow> |
-    ReturnType<typeof setUsers> |
-    ReturnType<typeof setCurrentPage> |
-    ReturnType<typeof setTotalUsersCount> |
-    ReturnType<typeof setIsFetching> |
-    ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setAuthUserData> |
-    ReturnType<typeof setIsFollowingProgress>
+// type ProfilePageReducerPropsType = {
+//     state: DialogsPageType
+//     action: ActionType
+// }
+// type ActionType =
+//     ReturnType<typeof addPostsActionCreator> |
+//     ReturnType<typeof addMessagesActionCreator> |
+//     ReturnType<typeof onPostChangeActionCreator> |
+//     ReturnType<typeof onMessageChangeActionCreator> |
+//     ReturnType<typeof follow> |
+//     ReturnType<typeof unfollow> |
+//     ReturnType<typeof setUsers> |
+//     ReturnType<typeof setCurrentPage> |
+//     ReturnType<typeof setTotalUsersCount> |
+//     ReturnType<typeof setIsFetching> |
+//     ReturnType<typeof setUserProfile> |
+//     ReturnType<typeof setAuthUserData> |
+//     ReturnType<typeof setIsFollowingProgress>
 
 
 

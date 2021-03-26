@@ -1,6 +1,5 @@
 import React from "react";
 import s from "./../Dialog.module.css";
-import {ActionType, RootStateType} from "../../../redux/store";
 
 
 type MessagesType = {
