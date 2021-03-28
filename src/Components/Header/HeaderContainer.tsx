@@ -39,9 +39,9 @@ class HeaderContainer extends React.Component<PropsType> {
 
     render() {
         return (
-            <div>
+
                 <Header {...this.props} />
-            </div>
+
         )
     }
 }
