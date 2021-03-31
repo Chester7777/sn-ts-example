@@ -48,7 +48,7 @@ let mapStateToProps = (state: AllAppStateType): MapStatePropsType => ({
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {getUserProfile}),
     withRouter,
-    withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer);
 
 //HOC создает контейненрную компаненту вокруг ProfileContainer

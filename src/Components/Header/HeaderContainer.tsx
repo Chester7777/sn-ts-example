@@ -57,4 +57,4 @@ let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
 
 //передает в компаненту данные из store
-export default connect<any,any,any,any>(mapStateToProps, {getAuthUserData})(WithUrlDataContainerComponent);
+export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {getAuthUserData})(WithUrlDataContainerComponent);
