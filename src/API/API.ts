@@ -1,7 +1,7 @@
 import axios from "axios";
 import {GetTasksResponseType} from "../Components/Users/UsersContainer";
 import {PostPropsType} from "../redux/auth-reducer";
-import {ProfilePropsType} from "../redux/profilePage-reducer";
+import {ProfilePropsType, StatusProfileType} from "../redux/profilePage-reducer";
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
@@ -23,14 +23,21 @@ export const usersAPI = {
     follow(id: number) {
        return  instance.post<PostPropsType>(`follow/${id}`)
            // .then(response => response.data)
-    },
+    }
+}
+
+export const profileAPI = {
     getProfile (userId: number) {
        return  instance.get<ProfilePropsType>(`profile/` + userId);
+    },
+    getStatus (userId: number) {
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus (status: string) {
+        return instance.put<StatusProfileType>(`profile/status`, {status: status})
     }
 
 }
-//id: number, email: string, login: string, isAuth: boolean
-
 
 export const authAPI = {
     me () {

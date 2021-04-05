@@ -11,7 +11,11 @@ export type InitialStateType = {
     isAuth: boolean
 }
 export type PostPropsType = {
-    data: InitialStateType
+    data: {
+        id: null,
+        email: null,
+        login: null,
+    }
     resultCode?: number
     messages?: Array<string>
 }
@@ -56,8 +60,8 @@ export const getAuthUserData = (userId: number | null, email: string | null, log
 
     authAPI.me().then((data) => {
         if (data.data.resultCode === 0) {
-            let {userId, email, login, isAuth} = data.data.data
-            dispatch(setAuthUserData(userId, email, login, isAuth));
+            let {id, email, login} = data.data.data
+            dispatch(setAuthUserData(id, email, login, true));
         }
     })
 }
