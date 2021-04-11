@@ -2,6 +2,7 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
+import {AddMyPostFormRedux} from "./Post/AddMyPostForm";
 
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -10,33 +11,22 @@ const MyPosts = (props: MyPostsPropsType) => {
                                                       likes={p.likes}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let onAddPost = () => {
-        props.addPosts()
+    let onAddPost = (values: any) => {
+        props.addPosts(values.newPostText)
     }
-
-    let onPostChange = () => {
-        if (newPostElement.current) {
-            let text = newPostElement.current.value;
-            props.onPostChangeActionCreator(text)
-        }
-    }
-
-
+    // let onPostChange = () => {
+    //     if (newPostElement.current) {
+    //         let text = newPostElement.current.value;
+    //         props.onPostChangeActionCreator(text)
+    //     }
+    // }
     return (
         <div className={s.post}>
+            <h3>My posts</h3>
+            <AddMyPostFormRedux onSubmit={onAddPost} />
             <div className={s.myPosts}>
-                {/*<h3>My posts</h3>*/}
+                {postsElement}
             </div>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement}
-                              value={props.newPostText}/>
-                </div>
-                <div className={s.button}>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
-            {postsElement}
         </div>
     )
 }

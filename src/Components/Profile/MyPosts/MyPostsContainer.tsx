@@ -42,8 +42,7 @@ type MapStateToPropsType = {
     posts: Array<PostsType>
 }
 type mapDispatchToPropsType = {
-    onPostChangeActionCreator: (text: string) => void
-    addPosts: () => void
+    addPosts: (newPostText: string) => void
 
 }
 export type MyPostsPropsType = MapStateToPropsType & mapDispatchToPropsType
@@ -57,11 +56,7 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
     return {
-        onPostChangeActionCreator: (text: string) => {
-            let action = onPostChangeActionCreator(text)
-            dispatch(action)
-        },
-        addPosts: () => dispatch(addPostsActionCreator())
+        addPosts: (newPostText: string) => dispatch(addPostsActionCreator(newPostText))
     }
 }
 

@@ -3,26 +3,33 @@ import s from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
+import {AddMessageFormRedux} from "./Message/AddMassageForm";
 
 
 const Dialogs = (props: DialogsPropsType) => {
 
     let messagesElement = React.createRef<HTMLTextAreaElement>();
+    let newMessageBody = state.newMessageText
 
     const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
     const messagesElements = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}/>)
 
-    let addMessages = () => {
-        props.addMessages()
+    // let addMessages = () => {
+    //     props.addMessages()
+    // }
+    let addNewMessage = (values: any) => {
+       values.newMessageText;
+
     }
 
-    let onMessageChange = () => {
-        if (messagesElement.current) {
-            let body = messagesElement.current.value
-            props.onMessageChange(body)
-        }
-    }
+    // let onMessageChange = () => {
+    //     if (messagesElement.current) {
+    //         let body = messagesElement.current.value
+    //         props.onMessageChange(body)
+    //     }
+    // }
+    if(!props.isAuth) return <Redirect to={"/login"} />
     return (
         <div>
             <h3>Massages</h3>
@@ -45,27 +52,16 @@ const Dialogs = (props: DialogsPropsType) => {
                         alt=""/>
                     {dialogsElements}
                 </div>
-
                 <div className={s.messages}>
-                    <div className={s.addText}>
-                        <textarea onChange={onMessageChange} ref={messagesElement}
-                                  value={props.dialogsPage.newMessageText}/>
-                    </div>
+                    <div>{messagesElements}</div>
+                    <AddMessageFormRedux onSubmit={addNewMessage}/>
 
-                    <div className={s.addTextButton}>
-                        <button onClick={addMessages}>+</button>
-                    </div>
-                    {messagesElements}
                 </div>
             </div>
-
-            {/*<div className={s.messages}>*/}
-
-            {/*</div>*/}
-
         </div>
     )
 }
+
 
 export default Dialogs;
 

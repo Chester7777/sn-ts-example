@@ -1,10 +1,10 @@
 const ADD_MESSAGE = "ADD-MESSAGE";
-const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
+// const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    newMessageText: string
+    // newMessageText: string
 }
 export type DialogsType = {
     id: number
@@ -31,40 +31,38 @@ let initialState: DialogsPageType = {
         {id: 1, messages: "Hi"},
         {id: 2, messages: "How is your It-kamasutra?"},
         {id: 3, messages: "Yo"},
-    ] as Array<MessagesType>,
-    newMessageText: "",
+    ] as Array<MessagesType>
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
 const dialogsPageReducer = (state: initialStateType = initialState, action: DialogsPageActionType): initialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
-            let body = state.newMessageText;
+            let body = action.newMessageText;
             return {
                 ...state,
-                newMessageText: "",
                 messages: [...state.messages, {id: 4, messages: body}]
         }
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newMessage
-        }
+        // case UPDATE_NEW_MESSAGE_TEXT:
+        //     return {
+        //         ...state,
+        //         newMessageText: action.newMessage
+        // }
         default:
             return state;
     }
 
 }
 
-export const addMessagesActionCreator = () => ({type: ADD_MESSAGE} as const)
-export const onMessageChangeActionCreator = (newMessage: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessage: newMessage
-} as const)
+export const addMessagesActionCreator = (newMessageText: string) => ({type: ADD_MESSAGE, newMessageText} as const)
+// export const onMessageChangeActionCreator = (newMessage: string) => ({
+//     type: UPDATE_NEW_MESSAGE_TEXT,
+//     newMessage: newMessage
+// } as const)
 
 export default dialogsPageReducer;
 
 type DialogsPageActionType =
 
-    ReturnType<typeof addMessagesActionCreator> |
-    ReturnType<typeof onMessageChangeActionCreator>
+    ReturnType<typeof addMessagesActionCreator>
+    // ReturnType<typeof onMessageChangeActionCreator>
