@@ -4,13 +4,12 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Redirect} from "react-router-dom";
-import {AddMessageFormRedux} from "./Message/AddMassageForm";
+import {AddMassageFormType, AddMessageFormRedux} from "./Message/AddMassageForm";
 
 
 const Dialogs = (props: DialogsPropsType) => {
-
     let messagesElement = React.createRef<HTMLTextAreaElement>();
-    let newMessageBody = state.newMessageText
+    // let newMessageBody = state.newMessageText
 
     const dialogsElements = props.dialogsPage.dialogs.map((d) => <DialogItem id={d.id} name={d.name}/>)
     const messagesElements = props.dialogsPage.messages.map((m) => <Message id={m.id} messages={m.messages}/>)
@@ -18,9 +17,8 @@ const Dialogs = (props: DialogsPropsType) => {
     // let addMessages = () => {
     //     props.addMessages()
     // }
-    let addNewMessage = (values: any) => {
-       values.newMessageText;
-
+    let addNewMessage = (values: AddMassageFormType) => {
+       props.addMessages(values.newMessageText);
     }
 
     // let onMessageChange = () => {

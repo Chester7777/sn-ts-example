@@ -1,16 +1,3 @@
-import {addPostsActionCreator, onPostChangeActionCreator, setUserProfile} from "./profilePage-reducer";
-import {addMessagesActionCreator, onMessageChangeActionCreator} from "./dialogsPage-reducer";
-import {
-    follow,
-    setCurrentPage,
-    setIsFetching,
-    setIsFollowingProgress,
-    setTotalUsersCount,
-    setUsers,
-    unfollow
-} from "./users-reducer";
-import {setAuthUserData} from "./auth-reducer";
-
 export type FriendsType = {
     name: string
     age: number

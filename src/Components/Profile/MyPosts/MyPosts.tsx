@@ -2,7 +2,7 @@ import React from "react";
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
 import {MyPostsPropsType} from "./MyPostsContainer";
-import {AddMyPostFormRedux} from "./Post/AddMyPostForm";
+import {AddMyPostFormRedux, MyPostsType} from "./Post/AddMyPostForm";
 
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -11,7 +11,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                                                       likes={p.likes}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let onAddPost = (values: any) => {
+    let onAddPost = (values: MyPostsType) => {
         props.addPosts(values.newPostText)
     }
     // let onPostChange = () => {

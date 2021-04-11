@@ -1,9 +1,11 @@
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import s from "../MyPosts.module.css";
 import React from "react";
 
-
-export const AddMyPostForm = (props: any) => {
+export type  MyPostsType = {
+    newPostText: string
+}
+export const AddMyPostForm = (props: InjectedFormProps<MyPostsType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -16,4 +18,4 @@ export const AddMyPostForm = (props: any) => {
     )
 }
 
-export const AddMyPostFormRedux = reduxForm({form: "ProfileFddPosts"})(AddMyPostForm)
+export const AddMyPostFormRedux = reduxForm<MyPostsType>({form: "ProfileFddPosts"})(AddMyPostForm)

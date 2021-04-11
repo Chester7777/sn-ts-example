@@ -35,7 +35,8 @@ import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 
 type MapStateToPropsType = {
     dialogsPage: DialogsPageType
-    newMessageText: string
+    // newMessageText: string
+    isAuth: boolean
 }
 type mapDispatchToPropsType = {
     addMessages: (newMessageText: string) => void
@@ -48,8 +49,9 @@ export type DialogsPropsType = MapStateToPropsType & mapDispatchToPropsType
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
         dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth,
         // newMessageText: state.newMessageText
-        newMessageText: state.dialogsPage.messages
+        // newMessageText: state.dialogsPage.messages
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {

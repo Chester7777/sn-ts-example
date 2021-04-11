@@ -1,10 +1,10 @@
 import React from "react";
-import {addPostsActionCreator, onPostChangeActionCreator} from "../../../redux/profilePage-reducer";
+import {addPostsActionCreator} from "../../../redux/profilePage-reducer";
 import MyPosts from "./MyPosts"
 import {connect} from "react-redux";
 import {AllAppStateType} from "../../../redux/Redux-store";
 import {Dispatch} from "redux";
-import {PostsType, ProfilePageType} from "../../../redux/store";
+import {PostsType} from "../../../redux/store";
 
 //самодельный контейнер
 // type MyPostsType = {
@@ -38,7 +38,7 @@ import {PostsType, ProfilePageType} from "../../../redux/store";
 
 
 type MapStateToPropsType = {
-    newPostText: string
+    // newPostText: string
     posts: Array<PostsType>
 }
 type mapDispatchToPropsType = {
@@ -50,7 +50,7 @@ export type MyPostsPropsType = MapStateToPropsType & mapDispatchToPropsType
 // подключили react-redux
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
-        newPostText: state.profilePage.newPostText,
+        // newPostText: state.profilePage.newPostText,
         posts: state.profilePage.posts
     }
 }

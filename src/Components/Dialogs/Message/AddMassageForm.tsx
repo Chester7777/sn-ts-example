@@ -1,9 +1,11 @@
 import s from "../Dialog.module.css";
-import {Field, reduxForm} from "redux-form";
+import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import React from "react";
 
-
-const AddMassageForm = (props: any) => {
+export type AddMassageFormType = {
+    newMessageText: string
+}
+const AddMassageForm = (props: InjectedFormProps<AddMassageFormType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.addText}>
@@ -17,4 +19,4 @@ const AddMassageForm = (props: any) => {
         </form>
     )
 }
-export const AddMessageFormRedux = reduxForm({form: "DialogAddMassageForm"})(AddMassageForm)
+export const AddMessageFormRedux = reduxForm<AddMassageFormType>({form: "DialogAddMassageForm"})(AddMassageForm)
