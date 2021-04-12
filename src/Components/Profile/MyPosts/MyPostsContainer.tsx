@@ -38,7 +38,6 @@ import {PostsType} from "../../../redux/store";
 
 
 type MapStateToPropsType = {
-    // newPostText: string
     posts: Array<PostsType>
 }
 type mapDispatchToPropsType = {

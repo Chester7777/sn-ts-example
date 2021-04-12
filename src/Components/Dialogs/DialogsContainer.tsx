@@ -35,7 +35,6 @@ import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 
 type MapStateToPropsType = {
     dialogsPage: DialogsPageType
-    // newMessageText: string
     isAuth: boolean
 }
 type mapDispatchToPropsType = {

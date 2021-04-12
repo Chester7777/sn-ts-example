@@ -3,7 +3,6 @@ import s from "./Dialog.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from "react-router-dom";
 import {AddMassageFormType, AddMessageFormRedux} from "./Message/AddMassageForm";
 
 
@@ -27,7 +26,7 @@ const Dialogs = (props: DialogsPropsType) => {
     //         props.onMessageChange(body)
     //     }
     // }
-    if(!props.isAuth) return <Redirect to={"/login"} />
+    // if(!props.isAuth) return <Redirect to={"/login"} />
     return (
         <div>
             <h3>Massages</h3>

@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
 import Header from "./Header";
-import {getAuthUserData} from "../../redux/auth-reducer";
+import {getAuthUserData, logout} from "../../redux/auth-reducer";
 
 type PathParamsType = {
     userId: string
@@ -15,6 +15,7 @@ type MapStatePropsType = {
 
 type MapDispatchPropsType = {
     getAuthUserData: () => void
+    logout:  () => void
 }
 
 
@@ -57,4 +58,4 @@ let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
 
 //передает в компаненту данные из store
-export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {getAuthUserData})(WithUrlDataContainerComponent);
+export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {getAuthUserData, logout})(WithUrlDataContainerComponent);

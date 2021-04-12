@@ -14,6 +14,7 @@ const MyPosts = (props: MyPostsPropsType) => {
     let onAddPost = (values: MyPostsType) => {
         props.addPosts(values.newPostText)
     }
+    //до подключения Form
     // let onPostChange = () => {
     //     if (newPostElement.current) {
     //         let text = newPostElement.current.value;
