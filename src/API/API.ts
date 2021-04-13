@@ -27,10 +27,10 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    getProfile (userId: number) {
-       return  instance.get<ProfilePropsType>(`profile/` + userId);
+    getProfile (userId: string) {
+       return  instance.get(`profile/` + userId);
     },
-    getStatus (userId: number) {
+    getStatus (userId: string) {
         return instance.get(`profile/status/` + userId)
     },
     updateStatus (status: string) {
@@ -41,7 +41,7 @@ export const profileAPI = {
 
 export const authAPI = {
     me () {
-        return instance.get<PostPropsType>(`auth/me`);
+        return instance.get(`auth/me`);
     },
     login (email: string, password: number, rememberMe: boolean) {
         return instance.post<any>(`auth/login`, {email, password, rememberMe})

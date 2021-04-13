@@ -24,6 +24,7 @@ const MyPosts = (props: MyPostsPropsType) => {
     return (
         <div className={s.post}>
             <h3>My posts</h3>
+            {/*<input type="text"/>*/}
             <AddMyPostFormRedux onSubmit={onAddPost} />
             <div className={s.myPosts}>
                 {postsElement}

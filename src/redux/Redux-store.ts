@@ -23,3 +23,6 @@ export type AllAppStateType = ReturnType<typeof reducers>
 export type AppStoreType = typeof store
 
 export default store;
+
+// @ts-ignore
+window.store = store
