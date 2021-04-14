@@ -90,7 +90,7 @@ export const addPostsActionCreator = (newPostText: string) => ({type: ADD_POST, 
 export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PROFILE, profile} as const)
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const)
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch<ProfileActionType>) => {
     profileAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response.data));
     })

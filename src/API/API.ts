@@ -11,42 +11,90 @@ const instance = axios.create({
     }
 })
 
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+    CaptchaIsRequired = 10
+}
+
 export const usersAPI = {
-    getUsers (currentPage: number, pageSize: number) {
+    getUsers(currentPage: number, pageSize: number) {
         return instance.get<GetTasksResponseType>(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data)
     },
     unfollow(id: number) {
-       return  instance.delete(`follow/${id}`)
-           // .then(response => response.data)
+        return instance.delete<LoginAuthResponseType>(`follow/${id}`)
+        // .then(response => response.data)
     },
     follow(id: number) {
-       return  instance.post<PostPropsType>(`follow/${id}`)
-           // .then(response => response.data)
+        return instance.post<PostPropsType>(`follow/${id}`)
+        // .then(response => response.data)
+    }
+}
+//
+type GetProfileResponseType = {
+    userId: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
     }
 }
 
 export const profileAPI = {
-    getProfile (userId: string) {
-       return  instance.get(`profile/` + userId);
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId);
     },
-    getStatus (userId: string) {
-        return instance.get(`profile/status/` + userId)
+    getStatus(userId: string) {
+        return instance.get<string>(`profile/status/` + userId)
     },
-    updateStatus (status: string) {
+    updateStatus(status: string) {
         return instance.put<StatusProfileType>(`profile/status`, {status: status})
     }
+}
 
+type MeResponseType = {
+    data: {
+        id: string
+        email: string
+        login: string
+    }
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+type LoginResponseType = {
+    data: {
+        userId: string
+    }
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+type LoginAuthResponseType = {
+    data: {}
+    resultCode: ResultCodesEnum
+    messages: Array<string>
 }
 
 export const authAPI = {
-    me () {
-        return instance.get(`auth/me`);
+    me() {
+        return instance.get<MeResponseType>(`auth/me`);
     },
-    login (email: string, password: number, rememberMe: boolean) {
-        return instance.post<any>(`auth/login`, {email, password, rememberMe})
+    login(email: string, password: number, rememberMe: boolean) {
+        return instance.post<LoginResponseType>(`auth/login`, {email, password, rememberMe})
     },
-    loginAuth () {
-        return instance.delete(`auth/login`)
+    loginAuth() {
+        return instance.delete<LoginAuthResponseType>(`auth/login`)
     }
 }
