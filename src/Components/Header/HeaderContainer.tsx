@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
 import Header from "./Header";
-import {getAuthUserData, logout} from "../../redux/auth-reducer";
+import {logout} from "../../redux/auth-reducer";
 
 type PathParamsType = {
     userId: string
@@ -14,7 +14,6 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-    getAuthUserData: () => void
     logout:  () => void
 }
 
@@ -34,9 +33,10 @@ type PostPropsType = {
 }
 
 class HeaderContainer extends React.Component<PropsType> {
-    componentDidMount() {
-        this.props.getAuthUserData()
-    }
+    //перенесли в APP
+    // componentDidMount() {
+    //     this.props.getAuthUserData()
+    // }
 
     render() {
         return (
@@ -58,4 +58,4 @@ let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
 
 //передает в компаненту данные из store
-export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {getAuthUserData, logout})(WithUrlDataContainerComponent);
+export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {logout})(WithUrlDataContainerComponent);

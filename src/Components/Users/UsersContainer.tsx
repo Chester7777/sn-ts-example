@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {AllAppStateType} from "../../redux/Redux-store";
 import {
     follow,
-    getUsersThunkCreator,
+    requestUsersThunkCreator,
     setCurrentPage,
     setIsFollowingProgress,
     unfollow,
@@ -11,8 +11,15 @@ import {
 import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {withAuthRedirect} from "../HOC/WithAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsers
+} from "../../redux/users-selectors";
 
 
 type MapStateToPropsType = {
@@ -94,14 +101,25 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 }
 
+//refactoring
+// let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
+//     return {
+//         users: state.usersPage.users,
+//         pageSize: state.usersPage.pageSize,
+//         totalUsersCount: state.usersPage.totalUsersCount,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     }
+// }
 let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsers(state),
+        pageSize: getPageSize(state),
+        totalUsersCount: getTotalUsersCount(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     }
 }
 
@@ -135,9 +153,8 @@ export default compose<React.ComponentType>(
         unfollow,
         setCurrentPage,
         setIsFollowingProgress,
-        getUsers: getUsersThunkCreator
-    }),
-    withAuthRedirect
+        getUsers: requestUsersThunkCreator
+    })
 )(UsersContainer);
 // let withRedirectComponent = withAuthRedirect(UsersContainer)
 //

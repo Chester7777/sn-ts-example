@@ -130,10 +130,11 @@ export type GetUsersThunkCreatorType = {
 }
 
 // type ThunkType = ThunkAction<void, AllAppStateType, unknown, ActionType>
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+export const requestUsersThunkCreator = (page: number, pageSize: number) => {
     return (dispatch: Dispatch) => {
         dispatch(setIsFetching(true));
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(setCurrentPage(page));
+        usersAPI.getUsers(page, pageSize).then(data => {
             dispatch(setIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))
