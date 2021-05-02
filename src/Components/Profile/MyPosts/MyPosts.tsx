@@ -25,12 +25,12 @@ const MyPosts = (props: MyPostsPropsType) => {
         <div className={s.post}>
             <h3>My posts</h3>
             {/*<input type="text"/>*/}
-            <AddMyPostFormRedux onSubmit={onAddPost} />
+            <AddMyPostFormRedux onSubmit={onAddPost}/>
             <div className={s.myPosts}>
                 {postsElement}
             </div>
         </div>
     )
-}
+};
 
 export default MyPosts;
