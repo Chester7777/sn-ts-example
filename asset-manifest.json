@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "/sn-ts-example/static/css/main.7659fd67.chunk.css",
-    "main.js": "/sn-ts-example/static/js/main.975a13a4.chunk.js",
-    "main.js.map": "/sn-ts-example/static/js/main.975a13a4.chunk.js.map",
-    "runtime-main.js": "/sn-ts-example/static/js/runtime-main.a1aea0af.js",
-    "runtime-main.js.map": "/sn-ts-example/static/js/runtime-main.a1aea0af.js.map",
-    "static/js/2.d9a133ef.chunk.js": "/sn-ts-example/static/js/2.d9a133ef.chunk.js",
-    "static/js/2.d9a133ef.chunk.js.map": "/sn-ts-example/static/js/2.d9a133ef.chunk.js.map",
-    "static/js/3.8457e089.chunk.js": "/sn-ts-example/static/js/3.8457e089.chunk.js",
-    "static/js/3.8457e089.chunk.js.map": "/sn-ts-example/static/js/3.8457e089.chunk.js.map",
+    "main.css": "/sn-ts-example/static/css/main.7b709359.chunk.css",
+    "main.js": "/sn-ts-example/static/js/main.b5848f2c.chunk.js",
+    "main.js.map": "/sn-ts-example/static/js/main.b5848f2c.chunk.js.map",
+    "runtime-main.js": "/sn-ts-example/static/js/runtime-main.83686b40.js",
+    "runtime-main.js.map": "/sn-ts-example/static/js/runtime-main.83686b40.js.map",
+    "static/js/2.5ab8c22a.chunk.js": "/sn-ts-example/static/js/2.5ab8c22a.chunk.js",
+    "static/js/2.5ab8c22a.chunk.js.map": "/sn-ts-example/static/js/2.5ab8c22a.chunk.js.map",
+    "static/js/3.17487a88.chunk.js": "/sn-ts-example/static/js/3.17487a88.chunk.js",
+    "static/js/3.17487a88.chunk.js.map": "/sn-ts-example/static/js/3.17487a88.chunk.js.map",
     "index.html": "/sn-ts-example/index.html",
-    "static/css/main.7659fd67.chunk.css.map": "/sn-ts-example/static/css/main.7659fd67.chunk.css.map",
-    "static/js/2.d9a133ef.chunk.js.LICENSE.txt": "/sn-ts-example/static/js/2.d9a133ef.chunk.js.LICENSE.txt"
+    "static/css/main.7b709359.chunk.css.map": "/sn-ts-example/static/css/main.7b709359.chunk.css.map",
+    "static/js/2.5ab8c22a.chunk.js.LICENSE.txt": "/sn-ts-example/static/js/2.5ab8c22a.chunk.js.LICENSE.txt",
+    "static/media/Pinwheel.21e3df13.gif": "/sn-ts-example/static/media/Pinwheel.21e3df13.gif",
+    "static/media/user.c6ac9673.png": "/sn-ts-example/static/media/user.c6ac9673.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.a1aea0af.js",
-    "static/js/2.d9a133ef.chunk.js",
-    "static/css/main.7659fd67.chunk.css",
-    "static/js/main.975a13a4.chunk.js"
+    "static/js/runtime-main.83686b40.js",
+    "static/js/2.5ab8c22a.chunk.js",
+    "static/css/main.7b709359.chunk.css",
+    "static/js/main.b5848f2c.chunk.js"
   ]
 }
