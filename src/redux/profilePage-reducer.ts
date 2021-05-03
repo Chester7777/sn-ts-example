@@ -96,22 +96,19 @@ export const deletePostsActionCreator = (postId: number) => ({type: DELETE_POST,
 export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PROFILE, profile} as const);
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 
-export const getUserProfile = (userId: string) => (dispatch: Dispatch<ProfileActionType>) => {
-    profileAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfile(response.data));
-    })
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch<ProfileActionType>) => {
+    let response = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(response.data));
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch) => {
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatus(response.data))
-    })
+export const getStatus = (userId: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.getStatus(userId);
+    dispatch(setStatus(response.data))
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch) => {
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setStatus(status))
-        }
-    })
+export const updateStatus = (status: string) => async (dispatch: Dispatch) => {
+    let response = await profileAPI.updateStatus(status);
+    if (response.data.resultCode === 0) {
+        dispatch(setStatus(status))
+    }
 }
 
 

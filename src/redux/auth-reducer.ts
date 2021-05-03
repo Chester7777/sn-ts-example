@@ -4,7 +4,7 @@ import {FormAction, stopSubmit} from "redux-form";
 import {ThunkDispatch} from "redux-thunk";
 import {AllAppStateType} from "./Redux-store";
 
-const SET_USER_DATA = "SET_USER_DATA";
+const SET_USER_DATA = "samurai_network/auth/SET_USER_DATA";
 
 
 export type InitialStateType = {
@@ -59,33 +59,27 @@ export const setAuthUserData = (userId: string, email: string | null, login: str
     type: SET_USER_DATA, payload: {userId, email, login, isAuth}
 } as const)
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-    return authAPI.me()
-        .then((data) => {
-            if (data.data.resultCode === 0) {
-                let {id, email, login} = data.data.data
-                dispatch(setAuthUserData(id, email, login, true));
-            }
-        })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.me();
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        dispatch(setAuthUserData(id, email, login, true));
+    }
 }
-export const login = (email: string, password: number, rememberMe: boolean = false) => (dispatch: ThunkDispatch<AllAppStateType, unknown, SetAuthUserDataAction | FormAction>) => {
-    authAPI.login(email, password, rememberMe)
-        .then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserData());
-            } else {
-                let message = response.data.messages.length > 10 ? response.data.messages[0] : "Some error"
-                dispatch(stopSubmit("login", {_error: message}));
-            }
-        })
+export const login = (email: string, password: number, rememberMe: boolean = false) => async (dispatch: ThunkDispatch<AllAppStateType, unknown, SetAuthUserDataAction | FormAction>) => {
+    let response = await authAPI.login(email, password, rememberMe);
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData());
+    } else {
+        let message = response.data.messages.length > 10 ? response.data.messages[0] : "Some error"
+        dispatch(stopSubmit("login", {_error: message}));
+    }
 }
-export const logout = () => (dispatch: Dispatch) => {
-    authAPI.loginAuth()
-        .then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(setAuthUserData('', null, null, false));
-            }
-        })
+export const logout = () => async (dispatch: Dispatch) => {
+    let response = await authAPI.loginAuth();
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserData('', null, null, false));
+    }
 }
 
 export default authReducer;

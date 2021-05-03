@@ -81,7 +81,7 @@ type LoginResponseType = {
     resultCode: ResultCodesEnum
     messages: Array<string>
 }
-type LoginAuthResponseType = {
+export type LoginAuthResponseType = {
     data: {}
     resultCode: ResultCodesEnum
     messages: Array<string>

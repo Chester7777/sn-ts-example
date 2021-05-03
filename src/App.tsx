@@ -1,5 +1,5 @@
 import React from "react";
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
 import Music from "./Components/Music/Music";
 import Navbar from "./Components/Navbar/Navbar";
@@ -10,7 +10,6 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer"
 import Login from "./Components/Login/Login";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
-import {getAuthUserData} from "../src/redux/auth-reducer";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {AllAppStateType} from "./redux/Redux-store";
@@ -22,7 +21,6 @@ type AppType = {
     initializeApp: () => void
     initialized: boolean
 }
-
 
 class App extends React.Component<AppType> {
     componentDidMount() {
