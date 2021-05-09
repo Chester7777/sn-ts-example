@@ -6,7 +6,7 @@ import {NavLink} from "react-router-dom"
 
 
 type PropsType = {
-    totalUsersCount: number
+    totalItemsCount: number
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
@@ -24,7 +24,7 @@ type PostPropsType = {
 
 
 let Users = (props: PropsType) => {
-    let pageCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pageCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
