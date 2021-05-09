@@ -10,9 +10,9 @@ import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer"
 import Login from "./Components/Login/Login";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {AllAppStateType} from "./redux/Redux-store";
+import store, {AllAppStateType, AppStoreType} from "./redux/Redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import {initializeApp} from "./redux/app-reducer"
 
@@ -60,5 +60,15 @@ const mapStateToProps = (state: AllAppStateType) => ({
 //     getAuthUserData:
 // })
 
-export default compose(
+let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
+
+export let MainAppContainer = () => {
+
+    // обернули APP что бы наши страницы переключались без перезагрузки
+    return <React.StrictMode>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </React.StrictMode>
+}
