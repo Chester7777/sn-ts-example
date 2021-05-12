@@ -1,20 +1,22 @@
-import React from "react";
+import React, {lazy} from "react";
 import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
 import Music from "./Components/Music/Music";
 import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/news";
 import Setting from "./Components/Setting/Setting";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer"
 import Login from "./Components/Login/Login";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import store, {AllAppStateType, AppStoreType} from "./redux/Redux-store";
+import store, {AllAppStateType} from "./redux/Redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
-import {initializeApp} from "./redux/app-reducer"
+import {initializeApp} from "./redux/app-reducer";
+import {WithSuspense} from "./Components/HOC/WithSuspense";
+
+const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
+const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));
 
 
 type AppType = {
@@ -39,8 +41,8 @@ class App extends React.Component<AppType> {
                     <Navbar/>
                     <div className="app-wrapper-content">
                         {/*Route - реактовская компонента, которая при совпадении с ее path позовет колбэк находящийся в ней*/}
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/>
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                        <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
+                        <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
                         <Route path="/news" render={() => <News/>}/>
                         <Route path="/music" render={() => <Music/>}/>
                         <Route path="/settings" render={() => <Setting/>}/>

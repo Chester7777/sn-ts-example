@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import {UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
 import {NavLink} from "react-router-dom"
+import {Paginator} from "../Common/Paginator/Paginator";
 
 
 type PropsType = {
@@ -13,6 +14,7 @@ type PropsType = {
     users: Array<UsersType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    portionSize: number
     // setIsFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<number>
     // resultCode: number
@@ -32,15 +34,20 @@ let Users = (props: PropsType) => {
     }
 
     return <div>
-        <div>
-            {pages.map(p => {
-                return <span
-                    key={p}
-                    className={props.currentPage === p ? s.selectedPage : ""}
-                    onClick={(e) => props.onPageChanged(p)}
-                >{p}</span>
-            })}
-        </div>
+        <Paginator currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}
+        totalItemsCount={props.totalItemsCount}
+        pageSize={props.portionSize}
+        portionSize={props.portionSize}/>
+        {/*<div>*/}
+        {/*    {pages.map(p => {*/}
+        {/*        return <span*/}
+        {/*            key={p}*/}
+        {/*            className={props.currentPage === p ? s.selectedPage : ""}*/}
+        {/*            onClick={(e) => props.onPageChanged(p)}*/}
+        {/*        >{p}</span>*/}
+        {/*    })}*/}
+        {/*</div>*/}
         {/*использовал до componentDidMount*/}
         {/*<button onClick={this.props.getUsers}>get users</button>*/}
         {

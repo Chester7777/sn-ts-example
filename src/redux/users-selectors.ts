@@ -18,3 +18,6 @@ export const getIsFetching = (state: AllAppStateType) => {
 export const getFollowingInProgress = (state: AllAppStateType) => {
     return state.usersPage.followingInProgress;
 }
+export const getPortionSize = (state: AllAppStateType) => {
+    return state.usersPage.portionSize;
+}

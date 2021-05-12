@@ -1,6 +1,4 @@
 import {usersAPI} from "../API/API";
-import {GetTasksResponseType} from "../Components/Users/UsersContainer"
-import {LoginAuthResponseType} from "../API/API"
 import {Dispatch} from "redux";
 
 
@@ -19,6 +17,7 @@ export type InitialStateType = {
     currentPage: number
     isFetching: boolean
     followingInProgress: Array<number>
+    portionSize: number
 }
 
 export type UsersType = {
@@ -45,7 +44,8 @@ let initialState: InitialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: []
+    followingInProgress: [],
+    portionSize: 10
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
