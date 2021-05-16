@@ -13,7 +13,8 @@ type ProfileInfoPropsType = {
     isOwner: boolean
     savePhoto: (filePhoto: any) => void
     lookingForAJob: boolean
-    saveProfile: (formData: any) => void
+    saveProfile: (formData: any) => Promise<void>
+    goToEditMode: () => void
     // contacts: ContactsType
     // lookingForAJobDescription: string
     // aboutMe: string
@@ -23,9 +24,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     const [editMode, setEditMode] = useState<boolean>(false);
 
-    if (!props.profile) {
-        return <Preloader/>
-    }
 
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,11 +33,11 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     const onSubmit = (formData: any) => {
+        debugger
         props.saveProfile(formData).then(() => {
             setEditMode(false);
         })
     }
-
     return (
         <div>
             <div className={s.image}>
@@ -61,11 +59,16 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     )
 }
 
-const ProfileData = ({profile}: any, isOwner: boolean, goToEditMode: () => void) => {
+type ProfileDataType  = {
+    profile: any, isOwner: boolean, goToEditMode: () => void
+}
 
+const ProfileData = ({profile, goToEditMode, isOwner}: ProfileDataType) => {
+debugger
     return (
         <div>
-            {isOwner && <div>
+            {isOwner &&
+            <div>
                 <button onClick={goToEditMode}>edit</button>
             </div>}
             <div>
@@ -82,9 +85,11 @@ const ProfileData = ({profile}: any, isOwner: boolean, goToEditMode: () => void)
                 <b>About me:</b> {profile.aboutMe}
             </div>
             <div>
-                <b>Contacts:</b> {Object.keys(profile.contacts).map((key) => {
+                <b>Contacts:</b> {profile.contacts &&
+            Object.keys(profile.contacts).map((key) => {
                 return <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
             })}
+
             </div>
         </div>
     )

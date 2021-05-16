@@ -12,23 +12,26 @@ import {
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
 import {compose} from "redux";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import Preloader from "../Common/Preloader/Preloader";
 
 type PathParamsType = {
     userId: string
 }
 type MapStatePropsType = {
-    profile: ProfilePropsType
+    profile: ProfilePropsType | null
     status: string
     authorizedUserId: string
     isAuth: boolean
-    lookingForAJob: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userId: number) => void
     getStatus: (userId: number) => void
     updateStatus: (status: string) => void
     savePhoto: (filePhoto: string) => void
-    saveProfile: (profile: ProfilePropsType) => void
+    saveProfile: (profile: ProfilePropsType) => Promise<void>
+    goToEditMode: () => void
+
 }
 type PropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
 
@@ -61,6 +64,10 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 
     render() {
+        if (!this.props.profile) {
+            return <Preloader/>
+        }
+
         return (
             <div>
                 <Profile
@@ -72,6 +79,8 @@ class ProfileContainer extends React.Component<PropsType> {
                     savePhoto={this.props.savePhoto}
                     lookingForAJob={this.props.profile.lookingForAJob}
                     saveProfile={this.props.saveProfile}
+                    goToEditMode={this.props.goToEditMode}
+
                 />
             </div>
         )
@@ -84,7 +93,7 @@ let mapStateToProps = (state: AllAppStateType): MapStatePropsType => ({
         status: state.profilePage.status,
         authorizedUserId: state.auth.userId,
         isAuth: state.auth.isAuth,
-        lookingForAJob: state.profilePage.profile.lookingForAJob
+
     }
 
 )

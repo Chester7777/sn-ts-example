@@ -1,16 +1,15 @@
 import React from "react";
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
-import {InjectedFormProps, reduxForm} from "redux-form";
-import {ProfilePropsType} from "../../../redux/profilePage-reducer";
+import {reduxForm} from "redux-form";
 import s from "../../Common/FormsControls/FormControls.module.css";
 
 
-type ProfileDataFormType = {
-    profile: ProfilePropsType
-    error: string
-}
+// type ProfileDataFormType = {
+//     profile: ProfilePropsType
+//     error: string
+// }
 
-const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormType>) => {
+const ProfileDataForm = (props: any) => {
 
     return (
         <form  onSubmit={props.handleSubmit}>
@@ -20,7 +19,7 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormType>) => {
             </div>}
 
             <div>
-                <b>Full name:</b> {createField("Full name", "FullName", [], Input)}
+                <b>Full name:</b> {createField("Full name", "fullName", [], Input)}
             </div>
             <div>
                 <b>Looking for a job:</b> {createField("", "lookingForAJob", [], Input, {type: "checkbox"})}
@@ -41,5 +40,5 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataFormType>) => {
     )
 }
 
-const ProfileDataFormReduxForm = reduxForm({form: "edit-profile"})(ProfileDataForm);
+const ProfileDataFormReduxForm = reduxForm<any,any>({form: "edit-profile"})(ProfileDataForm);
  export default ProfileDataFormReduxForm;

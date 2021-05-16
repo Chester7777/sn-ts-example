@@ -1,7 +1,7 @@
 import {profileAPI} from "../API/API";
 import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
-import {ActionTypes, stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
 import {AllAppStateType} from "./Redux-store";
 
 
@@ -57,7 +57,7 @@ let initialState = {
         {id: 1, message: "Hey, why nobody love me", likes: "15"},
         {id: 2, message: "It`s our new program! Hey", likes: "20"},
     ] as Array<PostsType>,
-    profile: {} as ProfilePropsType,
+    profile: null as ProfilePropsType | null,
     status: ""
 }
 
@@ -92,7 +92,7 @@ const profilePageReducer = (state: InitialStateType = initialState, action: Prof
         case SAVE_PHOTO_SUCCESS:
             return {
                 ...state,
-                profile: {...state.profile, photos: action.photos}
+                profile: state.profile && {...state.profile, photos: action.photos}
             }
 
         default:
@@ -106,7 +106,7 @@ export const setUserProfile = (profile: ProfilePropsType) => ({type: SET_USER_PR
 export const setStatus = (status: string) => ({type: SET_STATUS, status} as const);
 export const savePhotoSuccess = (photos: PhotosType) => ({type: SAVE_PHOTO_SUCCESS, photos} as const);
 
-type MyType = ThunkAction<void, AllAppStateType, unknown, ProfileActionType>
+type MyType = ThunkAction<void, AllAppStateType, unknown, ProfileActionType | FormAction>
 
 export const getUserProfile = (userId: string): MyType => async (dispatch: Dispatch<ProfileActionType>) => {
     let response = await profileAPI.getProfile(userId);
@@ -129,7 +129,8 @@ export const savePhoto = (file: string): MyType => async (dispatch: Dispatch) =>
     }
 }
 
-export const saveProfile = (profile: ProfilePropsType): MyType => async (dispatch: Dispatch, getState) => {
+export const saveProfile = (profile: ProfilePropsType): MyType => async (dispatch, getState) => {
+    debugger
     const userId = getState().auth.userId
     let response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === 0) {
@@ -141,12 +142,11 @@ export const saveProfile = (profile: ProfilePropsType): MyType => async (dispatc
 }
 
 
-type ProfileActionType =
+export type ProfileActionType =
     ReturnType<typeof addPostsActionCreator> |
     ReturnType<typeof deletePostsActionCreator> |
     ReturnType<typeof setUserProfile> |
     ReturnType<typeof setStatus> |
-    ReturnType<typeof savePhotoSuccess> |
     ReturnType<typeof savePhotoSuccess>
 
 export default profilePageReducer;

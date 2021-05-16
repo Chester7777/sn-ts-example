@@ -11,7 +11,8 @@ type PropsType = {
     isOwner: boolean
     savePhoto: (filePhoto: string) => void
     lookingForAJob: boolean
-    saveProfile: (formData: any) => void
+    saveProfile: (formData: any) => Promise<any>
+    goToEditMode: () => void
 
 }
 
@@ -27,6 +28,7 @@ const Profile = (props: PropsType) => {
                 savePhoto={props.savePhoto}
                 saveProfile={props.saveProfile}
                 lookingForAJob={props.profile.lookingForAJob}
+                goToEditMode={props.goToEditMode}
             />
             <MyPostsContainer/>
         </div>
