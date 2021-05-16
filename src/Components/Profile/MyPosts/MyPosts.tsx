@@ -7,7 +7,7 @@ import {AddMyPostFormRedux, MyPostsType} from "./Post/AddMyPostForm";
 
 const MyPosts = (props: MyPostsPropsType) => {
 
-    const postsElement = props.posts.map((p) => <Post id={p.id} message={p.message}
+    const postsElement = props.posts.map((p) => <Post key={p.id} id={p.id} message={p.message}
                                                       likes={p.likes}/>)
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 

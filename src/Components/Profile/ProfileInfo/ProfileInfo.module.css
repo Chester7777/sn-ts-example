@@ -2,8 +2,10 @@
     padding: 10px;
 }
 
-.image {
-
+.mainPhoto {
+    height: 100px;
+    width: 100px;
+    border-radius: 35px;
 }
 
 .image_backgraund {
@@ -11,4 +13,8 @@
     flex-direction: row;
     width: 100%;
     height: 200px;
+}
+
+.contact {
+    padding-left: 10px;
 }

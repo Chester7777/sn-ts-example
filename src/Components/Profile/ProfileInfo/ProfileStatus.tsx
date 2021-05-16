@@ -7,7 +7,7 @@ export type ProfileStatusPropsType = {
 
 const ProfileStatus = (props: ProfileStatusPropsType) => {
 
-    const [aditMode, setAditMode] = useState<boolean>(false);
+    const [editMode, setEditMode] = useState<boolean>(false);
     const [status, setStatus] = useState(props.status);
 
     useEffect(() => {
@@ -17,10 +17,10 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
     }, [props.status]);
 
     const activateEditMode = () => {
-        setAditMode(true)
+        setEditMode(true)
     };
     const deActivateEditMode = () => {
-        setAditMode(false)
+        setEditMode(false)
         props.updateStatus(status)
     };
     const changeStatus = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,11 +29,11 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     return (
         <div>
-            {!aditMode &&
+            {!editMode &&
             <div>
-                <span onDoubleClick={activateEditMode}>{props.status || "--------"}</span>
+                <b>Status: </b> <span onDoubleClick={activateEditMode}>{props.status || "--------"}</span>
             </div>}
-            {aditMode &&
+            {editMode &&
             <div>
                 <input
                     onChange={changeStatus}
