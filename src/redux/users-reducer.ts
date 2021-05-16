@@ -155,7 +155,11 @@ let followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: a
 
 export const follow = (userId: number) => {
     return async (dispatch: Dispatch) => {
-        followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
+        try {
+            followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
+        } catch (reject) {
+            return reject.data.data.error
+        }
     }
 }
 export const unfollow = (userId: number) => {
