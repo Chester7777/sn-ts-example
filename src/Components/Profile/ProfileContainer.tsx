@@ -12,7 +12,6 @@ import {
 import {RouteComponentProps, withRouter} from "react-router-dom"
 import {AllAppStateType} from "../../redux/Redux-store";
 import {compose} from "redux";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import Preloader from "../Common/Preloader/Preloader";
 
 type PathParamsType = {

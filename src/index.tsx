@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import {MainAppContainer} from "./App";
 
-ReactDOM.render(<MainAppContainer />, document.getElementById("root"));
+ReactDOM.render(<MainAppContainer/>, document.getElementById("root"));
 
 
 // эта компонента отрисовывает мое приложение

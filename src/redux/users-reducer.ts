@@ -143,7 +143,6 @@ export const requestUsersThunkCreator = (page: number, pageSize: number) => {
     }
 }
 
-
 let followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: any) => {
     dispatch(setIsFollowingProgress(true, userId));
     let response = await apiMethod(userId);

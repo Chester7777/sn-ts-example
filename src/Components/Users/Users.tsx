@@ -15,9 +15,7 @@ type PropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     portionSize: number
-    // setIsFollowingProgress: (isFetching: boolean, userId: number) => void
     followingInProgress: Array<number>
-    // resultCode: number
 }
 type PostPropsType = {
     id: number
@@ -35,10 +33,10 @@ let Users = (props: PropsType) => {
 
     return <div>
         <Paginator currentPage={props.currentPage}
-        onPageChanged={props.onPageChanged}
-        totalItemsCount={props.totalItemsCount}
-        pageSize={props.portionSize}
-        portionSize={props.portionSize}/>
+                   onPageChanged={props.onPageChanged}
+                   totalItemsCount={props.totalItemsCount}
+                   pageSize={props.portionSize}
+                   portionSize={props.portionSize}/>
         {/*<div>*/}
         {/*    {pages.map(p => {*/}
         {/*        return <span*/}

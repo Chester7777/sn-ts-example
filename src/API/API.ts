@@ -112,7 +112,7 @@ export const authAPI = {
 }
 
 export const securityAPI = {
-    security () {
+    security() {
         return instance.get<{ url: string }>("security/get-captcha-url")
     }
 }
