@@ -22,7 +22,6 @@ import {
     getUsers
 } from "../../redux/users-selectors";
 
-
 type MapStateToPropsType = {
     users: Array<UsersType>
     pageSize: number
