@@ -35,7 +35,7 @@ let Users = (props: PropsType) => {
         <Paginator currentPage={props.currentPage}
                    onPageChanged={props.onPageChanged}
                    totalItemsCount={props.totalItemsCount}
-                   pageSize={props.portionSize}
+                   pageSize={props.pageSize}
                    portionSize={props.portionSize}/>
         {/*<div>*/}
         {/*    {pages.map(p => {*/}
