@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
 import s from "./ProfileInfo.module.css"
-import Preloader from "../../Common/Preloader/Preloader";
 import {ProfilePropsType} from "../../../redux/profilePage-reducer";
 import ProfileStatus from "./ProfileStatus";
 import userPhoto from "../../../asseds/images/user.png"
@@ -15,15 +14,11 @@ type ProfileInfoPropsType = {
     lookingForAJob: boolean
     saveProfile: (formData: any) => Promise<void>
     goToEditMode: () => void
-    // contacts: ContactsType
-    // lookingForAJobDescription: string
-    // aboutMe: string
 }
 
 const ProfileInfo = (props: ProfileInfoPropsType) => {
 
     const [editMode, setEditMode] = useState<boolean>(false);
-
 
 
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +28,6 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     }
 
     const onSubmit = (formData: any) => {
-        debugger
         props.saveProfile(formData).then(() => {
             setEditMode(false);
         })
@@ -59,12 +53,12 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
     )
 }
 
-type ProfileDataType  = {
+type ProfileDataType = {
     profile: any, isOwner: boolean, goToEditMode: () => void
 }
 
 const ProfileData = ({profile, goToEditMode, isOwner}: ProfileDataType) => {
-debugger
+
     return (
         <div>
             {isOwner &&
