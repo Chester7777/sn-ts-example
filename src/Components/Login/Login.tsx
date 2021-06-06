@@ -1,6 +1,6 @@
 import React from "react";
 import {LoginFormType, LoginReduxForm} from "./LoginForm";
-import {connect, useSelector} from "react-redux";
+import {connect} from "react-redux";
 import {AllAppStateType} from "../../redux/Redux-store";
 import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";

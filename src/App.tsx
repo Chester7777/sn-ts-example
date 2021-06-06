@@ -51,7 +51,7 @@ class App extends React.Component<AppType> {
                     <Navbar/>
                     <div className="app-wrapper-content">
                         <Switch>
-                            {/*Route - реактовская компонента, которая при совпадении с ее path позовет колбэк находящийся в ней*/}
+                            {/*Route - реактовская компонента, которая при совпадении с ее path вызовет колбэк находящийся в ней*/}
                             <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
                             <Route path="/dialogs" render={WithSuspense(DialogsContainer)}/>
                             <Route path="/profile/:userId?" render={WithSuspense(ProfileContainer)}/>
@@ -72,9 +72,6 @@ class App extends React.Component<AppType> {
 const mapStateToProps = (state: AllAppStateType) => ({
     initialized: state.app.initialized
 })
-// const mapDispatchToProps = (state: AllAppStateType) => ({
-//     getAuthUserData:
-// })
 
 let AppContainer = compose(
     connect(mapStateToProps, {initializeApp}))(App);
