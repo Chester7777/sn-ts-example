@@ -1,10 +1,10 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {Action, applyMiddleware, combineReducers, compose, createStore} from "redux";
 import profilePageReducer from "./profilePage-reducer";
 import dialogsPageReducer from "./dialogsPage-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, {ThunkAction} from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
 import appReducer from "./app-reducer";
 
@@ -38,10 +38,11 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddle
 // функция создает store
 // let store: Store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-export type AllAppStateType = ReturnType<typeof reducers>
-export type AppStoreType = typeof store
+export type AllAppStateType = ReturnType<typeof reducers>;
+export type AppStoreType = typeof store;
+export type BaseThunkType<A extends Action ,R = Promise<void> > = ThunkAction<R, AllAppStateType, unknown, A>
 
 export default store;
 
 // @ts-ignore
-window.store = store
+window.store = store;

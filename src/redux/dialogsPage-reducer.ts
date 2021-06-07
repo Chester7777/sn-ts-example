@@ -1,4 +1,4 @@
-const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_MESSAGE = "sn/DIALOGS/ADD-MESSAGE";
 // const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
 
 export type DialogsPageType = {
@@ -18,7 +18,7 @@ export type MessagesType = {
 export type initialStateType = typeof initialState
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-let initialState: DialogsPageType = {
+let initialState = {
     dialogs: [
         {id: 1, name: "Dima"},
         {id: 2, name: "Jeny"},
@@ -35,14 +35,14 @@ let initialState: DialogsPageType = {
 }
 
 // обьект initialState задает начальное значение state, если он не придет сразу
-const dialogsPageReducer = (state: initialStateType = initialState, action: DialogsPageActionType): initialStateType => {
+const dialogsPageReducer = (state = initialState, action: DialogsPageActionType): initialStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             let body = action.newMessageText;
             return {
                 ...state,
                 messages: [...state.messages, {id: 4, messages: body}]
-        }
+            }
         // case UPDATE_NEW_MESSAGE_TEXT:
         //     return {
         //         ...state,
@@ -62,7 +62,5 @@ export const addMessagesActionCreator = (newMessageText: string) => ({type: ADD_
 
 export default dialogsPageReducer;
 
-type DialogsPageActionType =
-
-    ReturnType<typeof addMessagesActionCreator>
-    // ReturnType<typeof onMessageChangeActionCreator>
+type DialogsPageActionType = ReturnType<typeof addMessagesActionCreator>
+// ReturnType<typeof onMessageChangeActionCreator>

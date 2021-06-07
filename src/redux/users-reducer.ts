@@ -1,5 +1,6 @@
-import {usersAPI} from "../API/API";
 import {Dispatch} from "redux";
+import {usersAPI} from "../API/UsersAPI";
+import {BaseThunkType} from "./Redux-store";
 
 
 const FOLLOW = "FOLLOW";
@@ -143,6 +144,8 @@ export const requestUsersThunkCreator = (page: number, pageSize: number) => {
     }
 }
 
+type ThunkType = BaseThunkType<UsersActionType>;
+
 let followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: any, actionCreator: any) => {
     dispatch(setIsFollowingProgress(true, userId));
     let response = await apiMethod(userId);
@@ -152,8 +155,8 @@ let followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: a
     dispatch(setIsFollowingProgress(false, userId));
 }
 
-export const follow = (userId: number) => {
-    return async (dispatch: Dispatch) => {
+export const follow = (userId: number): ThunkType => {
+    return async (dispatch) => {
         try {
             followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
         } catch (reject) {
@@ -161,8 +164,8 @@ export const follow = (userId: number) => {
         }
     }
 }
-export const unfollow = (userId: number) => {
-    return async (dispatch: Dispatch) => {
+export const unfollow = (userId: number): ThunkType => {
+    return async (dispatch) => {
         followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess);
     }
 }

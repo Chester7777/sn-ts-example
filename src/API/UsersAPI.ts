@@ -1,0 +1,18 @@
+import {GetTasksResponseType} from "../Components/Users/UsersContainer";
+import {PostPropsType} from "../redux/auth-reducer";
+import {instance, LoginAuthResponseType} from "./API";
+
+export const usersAPI = {
+    getUsers(currentPage: number, pageSize: number) {
+        return instance.get<GetTasksResponseType>(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => response.data)
+    },
+    unfollow(id: number) {
+        return instance.delete<LoginAuthResponseType>(`follow/${id}`)
+        // .then(response => response.data)
+    },
+    follow(id: number) {
+        return instance.post<PostPropsType>(`follow/${id}`)
+        // .then(response => response.data)
+    }
+}
