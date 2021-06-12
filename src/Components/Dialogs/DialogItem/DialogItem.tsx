@@ -4,9 +4,10 @@ import s from "./../Dialog.module.css";
 import {DialogsType} from "../../../redux/store";
 
 const DialogItem: React.FC<DialogsType> = (props) => {
-    let path = "/dialogs/1" + props.id;
-    return (
 
+    let path = "/dialogs/1" + props.id;
+
+    return (
         <div className={s.dialogsItems + " " + s.active}>
             <NavLink to={path}>{props.name}</NavLink>
         </div>

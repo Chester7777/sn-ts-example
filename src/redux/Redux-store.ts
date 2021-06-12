@@ -40,7 +40,7 @@ const store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddle
 
 export type AllAppStateType = ReturnType<typeof reducers>;
 export type AppStoreType = typeof store;
-export type BaseThunkType<A extends Action ,R = Promise<void> > = ThunkAction<R, AllAppStateType, unknown, A>
+export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, AllAppStateType, unknown, A>
 
 export default store;
 

@@ -5,10 +5,10 @@ export type ProfileStatusPropsType = {
     updateStatus: (status: string) => void
 }
 
-const ProfileStatus = (props: ProfileStatusPropsType) => {
+const ProfileStatus: React.ComponentType<ProfileStatusPropsType> = (props) => {
 
     const [editMode, setEditMode] = useState<boolean>(false);
-    const [status, setStatus] = useState(props.status);
+    const [status, setStatus] = useState<string>(props.status);
 
     useEffect(() => {
         if (status !== props.status) {

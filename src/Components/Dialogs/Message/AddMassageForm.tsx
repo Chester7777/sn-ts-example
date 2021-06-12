@@ -7,8 +7,11 @@ import {Textarea} from "../../Common/FormsControls/FormsControls";
 export type AddMassageFormType = {
     newMessageText: string
 }
+
 const maxLength50 = maxLengthCreator(50);
-const AddMassageForm = (props: InjectedFormProps<AddMassageFormType>) => {
+
+const AddMassageForm: React.FC<InjectedFormProps<AddMassageFormType>> = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.addText}>
@@ -17,14 +20,12 @@ const AddMassageForm = (props: InjectedFormProps<AddMassageFormType>) => {
                     name="newMessageText"
                     placeholder="Enter your message"
                     validate={[required, maxLength50]}
-
                 />
             </div>
 
             <div className={s.addTextButton}>
                 <button>send</button>
             </div>
-
         </form>
     )
 }

@@ -1,21 +1,15 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import s from "./Navbar.module.css";
-import Friend from "../Sidebar/friend";
-import {FriendsType} from "../../redux/store";
 
-type NavbarType = {
-    //friends: Array<FriendsType>
-}
 
-const Navbar = (props: NavbarType) => {
-
+const Navbar: React.FC = (props) => {
 
     return (
         <nav className={s.nav}>
             <div className={`${s.item} ${s.active}`}>
 
-{/*меняет url в браузере без перезакрузки страницы*/}
+                {/*меняет url в браузере без перезакрузки страницы*/}
                 <NavLink activeClassName={s.active} to="/profile">Profile</NavLink>
             </div>
             <div className={s.item}>

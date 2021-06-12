@@ -1,17 +1,18 @@
-import React from "react";
+import React, {FormEventHandler} from "react";
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
 import {reduxForm} from "redux-form";
 import s from "../../Common/FormsControls/FormControls.module.css";
 import {ProfilePropsType} from "../../../redux/profilePage-reducer";
 
 
-// type ProfileDataFormType = {
-//     profile: ProfilePropsType
-//     error: string
-// }
+type ProfileDataFormType = {
+    profile: ProfilePropsType
+    error: string
+    handleSubmit: any
+}
+// type ProfileTypeKeys = GetStringKeys<PropsType>
 
-
-const ProfileDataForm = (props: any) => {
+const ProfileDataForm = (props: ProfileDataFormType) => {
 
     return (
         <form  onSubmit={props.handleSubmit}>

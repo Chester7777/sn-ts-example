@@ -2,7 +2,7 @@ import React from "react";
 import preloader from "../../../asseds/images/Pinwheel.gif";
 
 
-let Preloader = () => {
+let Preloader: React.FC = () => {
 
     return <>
          <img src={preloader}/>

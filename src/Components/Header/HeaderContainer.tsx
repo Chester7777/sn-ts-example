@@ -12,25 +12,11 @@ type MapStatePropsType = {
     isAuth: boolean
     login: string | null
 }
-
 type MapDispatchPropsType = {
-    logout:  () => void
+    logout: () => void
 }
-
-
 export type PropsType = RouteComponentProps<PathParamsType> & MapStatePropsType & MapDispatchPropsType
 
-type DataPropsType = {
-    id: number
-    email: string
-    login: string
-    isAuth: boolean
-}
-type PostPropsType = {
-    data: DataPropsType
-    resultCode: number
-    messages: Array<string>
-}
 
 class HeaderContainer extends React.Component<PropsType> {
     //перенесли в APP
@@ -40,9 +26,7 @@ class HeaderContainer extends React.Component<PropsType> {
 
     render() {
         return (
-
-                <Header {...this.props} />
-
+            <Header {...this.props} />
         )
     }
 }
@@ -53,9 +37,8 @@ let mapStateToProps = (state: AllAppStateType): MapStatePropsType => ({
 })
 
 //передает компаненте данные из URL
-
 let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
 
 //передает в компаненту данные из store
-export default connect<MapStatePropsType,any,any,any>(mapStateToProps, {logout})(WithUrlDataContainerComponent);
+export default connect<MapStatePropsType, MapDispatchPropsType, any, any>(mapStateToProps, {logout})(WithUrlDataContainerComponent);

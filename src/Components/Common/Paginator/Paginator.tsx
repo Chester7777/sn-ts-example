@@ -13,8 +13,7 @@ type PaginatorType = {
 }
 
 
-
-export let Paginator = (props: PaginatorType) => {
+export let Paginator: React.FC<PaginatorType> = (props) => {
 
     const portionSize = useSelector<AllAppStateType, number>(state => state.usersPage.portionSize);
 
@@ -55,7 +54,6 @@ export let Paginator = (props: PaginatorType) => {
                     setPortionNumber(portionNumber + 1)
                 }}>PREV</button>
             }
-
         </div>
     )
 }

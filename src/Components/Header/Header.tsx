@@ -4,7 +4,8 @@ import {NavLink} from "react-router-dom";
 import {PropsType} from "./HeaderContainer";
 
 
-const Header = (props: PropsType) => {
+const Header: React.FC<PropsType> = (props) => {
+
     return <header className={s.header}>
         <img
             src="https://placeitmarketing.s3.amazonaws.com/public/custompages/logo-maker/Esports-Logo-Maker.png"/>

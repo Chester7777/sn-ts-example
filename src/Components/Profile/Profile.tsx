@@ -13,10 +13,9 @@ type PropsType = {
     lookingForAJob: boolean
     saveProfile: (formData: any) => Promise<any>
     goToEditMode: () => void
-
 }
 
-const Profile = (props: PropsType) => {
+const Profile: React.ComponentType<PropsType> = (props) => {
 
     return (
         <div>

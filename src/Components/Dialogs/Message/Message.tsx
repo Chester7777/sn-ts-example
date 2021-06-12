@@ -3,13 +3,10 @@ import s from "./../Dialog.module.css";
 
 
 type MessagesType = {
-     id: number
-
+    id: number
     messages: string
     // newMessageText: string
 }
-
-
 
 
 const Message: React.FC<MessagesType> = (props) => {
@@ -26,18 +23,18 @@ const Message: React.FC<MessagesType> = (props) => {
     //     }
     // }
 
-    return (
-        <div>
-            <div className={s.message}>{props.messages}</div>
-            {/*<div>*/}
-            {/*    /!*<div className={s.addText}>*!/*/}
-            {/*    /!*    <textarea onChange={onMessageChange} ref={messagesElement} value={props.newMessageText}/>*!/*/}
-            {/*    /!*</div>*!/*/}
-            {/*    /!*<div className={s.addTextButton}>*!/*/}
-            {/*    /!*    <button onClick={addMessages}></button>*!/*/}
-            {/*    /!*</div>*!/*/}
-            {/*</div>*/}
-        </div>
+    return (<div className={s.message}>{props.messages}</div>
+
+        // <div>
+        //         {/*<div>*/}
+        //         {/*    /!*<div className={s.addText}>*!/*/}
+        //         {/*    /!*    <textarea onChange={onMessageChange} ref={messagesElement} value={props.newMessageText}/>*!/*/}
+        //         {/*    /!*</div>*!/*/}
+        //         {/*    /!*<div className={s.addTextButton}>*!/*/}
+        //         {/*    /!*    <button onClick={addMessages}></button>*!/*/}
+        //         {/*    /!*</div>*!/*/}
+        //         {/*</div>*/}
+        // </div>
     )
 }
 

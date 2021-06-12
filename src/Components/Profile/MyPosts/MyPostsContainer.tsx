@@ -61,5 +61,3 @@ let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyPosts);
-//
-// export default MyPostsContainer;
