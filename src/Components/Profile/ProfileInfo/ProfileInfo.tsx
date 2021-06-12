@@ -27,7 +27,7 @@ const ProfileInfo = (props: ProfileInfoPropsType) => {
         }
     }
 
-    const onSubmit = (formData: any) => {
+    const onSubmit = (formData: ProfileDataType) => {
         props.saveProfile(formData).then(() => {
             setEditMode(false);
         })
@@ -94,7 +94,7 @@ type ContactType = {
     contactTitle: string
     contactValue: string | null
 }
-export const Contact = ({contactTitle, contactValue}: ContactType) => {
+export const Contact: React.ComponentType<ContactType> = ({contactTitle, contactValue}) => {
 
     return <div className={s.contact}><b>{contactTitle}:</b> {contactValue}</div>
 }

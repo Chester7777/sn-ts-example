@@ -76,7 +76,7 @@ const mapStateToProps = (state: AllAppStateType) => ({
 //     getAuthUserData:
 // })
 
-let AppContainer = compose(
+let AppContainer = compose<React.ComponentType>(
     connect(mapStateToProps, {initializeApp}))(App);
 
 export let MainAppContainer = () => {

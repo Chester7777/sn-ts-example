@@ -2,12 +2,14 @@ import React from "react";
 import {createField, Input} from "../../Common/FormsControls/FormsControls";
 import {reduxForm} from "redux-form";
 import s from "../../Common/FormsControls/FormControls.module.css";
+import {ProfilePropsType} from "../../../redux/profilePage-reducer";
 
 
 // type ProfileDataFormType = {
 //     profile: ProfilePropsType
 //     error: string
 // }
+
 
 const ProfileDataForm = (props: any) => {
 

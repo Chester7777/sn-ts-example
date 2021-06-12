@@ -24,6 +24,7 @@ type PostPropsType = {
 
 
 let Users = (props: PropsType) => {
+    
     let pageCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
     let pages = [];
@@ -61,7 +62,6 @@ let Users = (props: PropsType) => {
                             {u.followed ?
                                 <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.unfollow(u.id)
-
                                 }}>unfollow</button>
                                 : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                                     props.follow(u.id)
