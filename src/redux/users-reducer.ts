@@ -39,7 +39,7 @@ type CountryType = {
     citi: string
 }
 // обьект initialState задает начальное значение state, если он не придет сразу
-let initialState: InitialStateType = {
+export let initialState: InitialStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
