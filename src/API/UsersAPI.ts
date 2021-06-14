@@ -12,7 +12,13 @@ export const usersAPI = {
         // .then(response => response.data)
     },
     follow(id: number) {
-        return instance.post<PostPropsType>(`follow/${id}`)
+        return instance.post<any>(`follow/${id}`)
         // .then(response => response.data)
     }
 }
+
+// export type FollowPostPropsType = {
+//     data: {},
+//     messages: [],
+//     resultCode: number
+// }

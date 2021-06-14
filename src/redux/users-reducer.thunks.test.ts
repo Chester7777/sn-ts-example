@@ -1,51 +1,46 @@
-import usersReducer, {followSuccess, InitialStateType, unfollowSuccess} from "./users-reducer";
+import {follow, setIsFollowingProgress, unfollow} from "./users-reducer";
+import {usersAPI} from "../API/UsersAPI";
+import {PostPropsType} from "./auth-reducer";
+import {ResultCodesEnum} from "../API/API";
 
+jest.mock("../API/UsersAPI");
+const userAPIMock = usersAPI as jest.Mocked<typeof usersAPI>;
 
-
-let state: InitialStateType;
+const result: PostPropsType = {
+    id: null,
+    email: null,
+    login: null,
+    // data: {},
+    resultCode: ResultCodesEnum.Success,
+    messages: []
+}
+//@ts-ignore
+userAPIMock.follow.mockReturnValue(Promise.resolve(result));
+const dispatchMock = jest.fn();
+const getStateMock = jest.fn();
 
 beforeEach(() => {
-    state = {
-        users: [
-            {
-                name: "Dima", id: 1, uniqueUrlName: "dima", photos: {small: null, large: null},
-                status: "status 1", followed: false
-            },
-            {
-                name: "Andrey", id: 2, uniqueUrlName: "dima", photos: {small: null, large: null},
-                status: "status 2", followed: false
-            },
-            {
-                name: "Masha", id: 3, uniqueUrlName: "dima", photos: {small: null, large: null},
-                status: "status 3", followed: true
-            },
-            {
-                name: "Inna", id: 4, uniqueUrlName: "dima", photos: {small: null, large: null},
-                status: "status 4", followed: true
-            },
-
-        ],
-        pageSize: 10,
-        totalUsersCount: 0,
-        currentPage: 1,
-        isFetching: false,
-        followingInProgress: [],
-        portionSize: 10
-    }
+    dispatchMock.mockClear();
+    getStateMock.mockClear();
+    userAPIMock.follow.mockClear();
+    userAPIMock.unfollow.mockClear();
 })
 
-test("follow success", () => {
-
-    let newState = usersReducer(state, followSuccess(1))
-
-expect(newState.users[0].followed).toBeTruthy();
-expect(newState.users[1].followed).toBeFalsy();
-})
-test("unfollow success", () => {
-
-    let newState = usersReducer(state, unfollowSuccess(1))
-
-expect(newState.users[2].followed).toBeTruthy();
-expect(newState.users[1].followed).toBeFalsy();
-})
-
+// test("success follow thunk", async () => {
+//     const thunk = follow(1);
+//
+//
+//     await thunk(dispatchMock, getStateMock, {});
+//
+//     expect(dispatchMock).toBeCalledTimes(1);
+//     expect(dispatchMock).toHaveBeenNthCalledWith(1, setIsFollowingProgress(true, 1));
+// })
+// test("success unfollow thunk", async () => {
+//     const thunk = unfollow(1);
+//
+//
+//     await thunk(dispatchMock, getStateMock, {});
+//
+//     expect(dispatchMock).toBeCalledTimes(3);
+//     expect(dispatchMock).toHaveBeenNthCalledWith(1, setIsFollowingProgress(true, 1));
+// })
