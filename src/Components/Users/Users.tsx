@@ -1,9 +1,10 @@
 import React from "react";
 import s from "./Users.module.css";
-import {UsersType} from "../../redux/users-reducer";
+import {FilterType, UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
 import {NavLink} from "react-router-dom"
 import {Paginator} from "../Common/Paginator/Paginator";
+import {UsersSearchForm} from "./UsersSearchForm";
 
 
 type PropsType = {
@@ -11,6 +12,7 @@ type PropsType = {
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
+    onFilterChanged: (filter: FilterType) => void
     users: Array<UsersType>
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -24,7 +26,7 @@ type PostPropsType = {
 
 
 let Users = (props: PropsType) => {
-    
+
     let pageCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
     let pages = [];
@@ -33,6 +35,7 @@ let Users = (props: PropsType) => {
     }
 
     return <div>
+        <UsersSearchForm onFilterChanged={props.onFilterChanged}/>
         <Paginator currentPage={props.currentPage}
                    onPageChanged={props.onPageChanged}
                    totalItemsCount={props.totalItemsCount}
