@@ -22,7 +22,7 @@ export type InitialStateType = {
     portionSize: number
     filter: {
         term: string
-        friend:  null | boolean
+        friend: null | boolean
     }
 }
 
@@ -176,7 +176,7 @@ let followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: (
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
         try {
-          await followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
+            await followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
         } catch (reject) {
             return reject.data.data.error
         }
@@ -184,7 +184,7 @@ export const follow = (userId: number): ThunkType => {
 }
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-       await followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess);
+        await followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess);
     }
 }
 

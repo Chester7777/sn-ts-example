@@ -1,5 +1,4 @@
 import {GetTasksResponseType} from "../Components/Users/UsersContainer";
-import {PostPropsType} from "../redux/auth-reducer";
 import {instance, LoginAuthResponseType} from "./API";
 
 export const usersAPI = {

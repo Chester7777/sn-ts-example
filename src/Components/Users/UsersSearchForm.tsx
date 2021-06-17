@@ -8,20 +8,30 @@ const usersSearchFormValidate = (values: any) => {
     return errors;
 }
 
+type FormType = {
+    term: ""
+    friend: "true" | "false" | "null"
+}
+
 type PropsType = {
     onFilterChanged: (filter: FilterType) => void
 }
 
 export const UsersSearchForm: React.FC<PropsType> = React.memo((props) => {
 
-        const submit = (values: FilterType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
-            props.onFilterChanged(values)
+        const submit = (values: FormType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
+            const filter: FilterType = {
+                term: values.term,
+                friend: values.friend === "null" ? null : values.friend === "true" ? true : false
+            }
+
+            props.onFilterChanged(filter)
             setSubmitting(false);
         }
 
         return <div>
             <Formik
-                initialValues={{term: '', friend: null}}
+                initialValues={{term: '', friend: "null"}}
                 validate={usersSearchFormValidate}
                 onSubmit={submit}
             >
