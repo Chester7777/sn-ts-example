@@ -1,23 +1,33 @@
-import React from "react";
+import React, {FC, useEffect} from "react";
 import s from "./Users.module.css";
-import {FilterType, UsersType} from "../../redux/users-reducer";
+import {FilterType, requestUsersThunkCreator, UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
 import {NavLink} from "react-router-dom"
 import {Paginator} from "../Common/Paginator/Paginator";
 import {UsersSearchForm} from "./UsersSearchForm";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    getCurrentPage,
+    getFollowingInProgress,
+    getPageSize, getPortionSize,
+    getTotalUsersCount,
+    getUsers,
+    getUsersFilter
+} from "../../redux/users-selectors";
 
 
 type PropsType = {
-    totalItemsCount: number
-    pageSize: number
-    currentPage: number
-    onPageChanged: (pageNumber: number) => void
-    onFilterChanged: (filter: FilterType) => void
-    users: Array<UsersType>
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    portionSize: number
-    followingInProgress: Array<number>
+    // totalUsersCount: number
+    // totalItemsCount: number
+    // pageSize: number
+    // currentPage: number
+    // onPageChanged: (pageNumber: number) => void
+    // onFilterChanged: (filter: FilterType) => void
+    // users: Array<UsersType>
+    // follow: (userId: number) => void
+    // unfollow: (userId: number) => void
+    // portionSize: number
+    // followingInProgress: Array<number>
 }
 type PostPropsType = {
     id: number
@@ -25,9 +35,38 @@ type PostPropsType = {
 }
 
 
-let Users = (props: PropsType) => {
+export const Users: FC<PropsType> = (props) => {
 
-    let pageCount = Math.ceil(props.totalItemsCount / props.pageSize);
+    const dispatch = useDispatch();
+    const totalUsersCount = useSelector(getTotalUsersCount);
+    const currentPage = useSelector(getCurrentPage);
+    const pageSize = useSelector(getPageSize);
+    const filter = useSelector(getUsersFilter);
+    const users = useSelector(getUsers);
+    const followingInProgress = useSelector(getFollowingInProgress);
+    const portionSize = useSelector(getPortionSize);
+
+    useEffect(() => {
+        dispatch(requestUsersThunkCreator(currentPage, pageSize, filter));
+    }, [])
+
+    //подключаем thunkCreator (санки)
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(requestUsersThunkCreator(pageNumber, pageSize, filter));
+    };
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(requestUsersThunkCreator(1, pageSize, filter));
+    };
+    const follow = (userId: number) => {
+        dispatch(follow(userId))
+    };
+    const unfollow = (userId: number) => {
+        dispatch(unfollow(userId))
+    };
+
+
+
+    let pageCount = Math.ceil(totalUsersCount / pageSize);
 
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
@@ -35,12 +74,12 @@ let Users = (props: PropsType) => {
     }
 
     return <div>
-        <UsersSearchForm onFilterChanged={props.onFilterChanged}/>
-        <Paginator currentPage={props.currentPage}
-                   onPageChanged={props.onPageChanged}
-                   totalItemsCount={props.totalItemsCount}
-                   pageSize={props.pageSize}
-                   portionSize={props.portionSize}/>
+        <UsersSearchForm onFilterChanged={onFilterChanged}/>
+        <Paginator currentPage={currentPage}
+                   onPageChanged={onPageChanged}
+                   totalItemsCount={totalUsersCount}
+                   pageSize={pageSize}
+                   portionSize={portionSize}/>
         {/*<div>*/}
         {/*    {pages.map(p => {*/}
         {/*        return <span*/}
@@ -53,7 +92,7 @@ let Users = (props: PropsType) => {
         {/*использовал до componentDidMount*/}
         {/*<button onClick={this.props.getUsers}>get users</button>*/}
         {
-            props.users.map((u: UsersType) => {
+            users.map((u: UsersType) => {
                     return <div key={u.id}>
                     <span>
                         <div>
@@ -63,11 +102,11 @@ let Users = (props: PropsType) => {
                         </div>
                         <div>
                             {u.followed ?
-                                <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.unfollow(u.id)
+                                <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    unfollow(u.id)
                                 }}>unfollow</button>
-                                : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                                    props.follow(u.id)
+                                : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    follow(u.id)
                                 }}>follow</button>
                             }
                         </div>
@@ -97,4 +136,3 @@ let Users = (props: PropsType) => {
     </div>
 }
 
-export default Users;

@@ -5,7 +5,6 @@ import Music from "./Components/Music/Music";
 import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/news";
 import Setting from "./Components/Setting/Setting";
-import UsersContainer from "./Components/Users/UsersContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer"
 import Login from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
@@ -14,6 +13,7 @@ import store, {AllAppStateType} from "./redux/Redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import {initializeApp} from "./redux/app-reducer";
 import {WithSuspense} from "./Components/HOC/WithSuspense";
+import { UsersPage } from "./Components/Users/UsersContainer";
 
 const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));
@@ -58,7 +58,7 @@ class App extends React.Component<AppType> {
                             <Route path="/news" render={() => <News/>}/>
                             <Route path="/music" render={() => <Music/>}/>
                             <Route path="/settings" render={() => <Setting/>}/>
-                            <Route path="/users" render={() => <UsersContainer/>}/>
+                            <Route path="/users" render={() => <UsersPage pageTitle={"User"}/>}/>
                             <Route path="/login" render={() => <Login/>}/>
                             <Route path="*" render={() => <div><b>404 NOT FOUND</b></div>}/>
                         </Switch>

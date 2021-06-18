@@ -1,119 +1,84 @@
-import {connect} from "react-redux";
-import {AllAppStateType} from "../../redux/Redux-store";
-import {
-    FilterType,
-    follow,
-    requestUsersThunkCreator,
-    setCurrentPage,
-    setIsFollowingProgress,
-    unfollow,
-    UsersType
-} from "../../redux/users-reducer";
+import {useSelector} from "react-redux";
 import React from "react";
-import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
-import {compose} from "redux";
-import {
-    getCurrentPage,
-    getFollowingInProgress,
-    getIsFetching,
-    getPageSize,
-    getPortionSize,
-    getTotalUsersCount,
-    getUsers, getUsersFilter
-} from "../../redux/users-selectors";
+import {getIsFetching} from "../../redux/users-selectors";
+import {Users} from "./Users";
 
-type MapStateToPropsType = {
-    users: Array<UsersType>
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    followingInProgress: Array<number>
-    portionSize: number
-    filter: FilterType
 
+
+type UsersPageType = {
+    pageTitle: string
 }
-type mapDispatchToPropsType = {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setCurrentPage: (pageNumber: number) => void
-    setIsFollowingProgress: (isFetching: boolean, userId: number) => void
-    getUsers: (currentPage: number, pageSize: number, filter: FilterType) => void
-    // setUsers: (users: Array<UsersType>) => void
-    // setTotalUsersCount: (totalCount: number) => void
-    // setIsFetching: (isFetching: boolean) => void
 
+export const UsersPage: React.FC<UsersPageType> = (props) => {
 
+    const isFetching = useSelector(getIsFetching)
+
+    return <>
+        {isFetching ? <Preloader/> : null}
+        {/*<Paginator />*/}
+        <Users/>
+    </>
 }
-export type UsersPropsType = MapStateToPropsType & mapDispatchToPropsType;
 
-export type GetTasksResponseType = {
-    items: Array<UsersType>
-    totalCount: number
-    error: string | null
-}
-// export type OnPageChangedType = {
-//     onPageChanged: (pageNumber: number) => void
+
+//тоже на классовой компаненте
+// class UsersContainer extends React.Component<UsersPropsType> {
+
+//подключаем thunkCreator (санки)
+// componentDidMount() {
+//     const {currentPage, pageSize, filter} = this.props;
+//     this.props.getUsers(currentPage, pageSize, filter);
 // }
 
+// componentDidMount() {
+//     this.props.setIsFetching(true)
+//     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+//         this.props.setIsFetching(false)
+//         this.props.setUsers(data.items)
+//         this.props.setTotalUsersCount(data.totalCount)
+//     })
+// }
 
-class UsersContainer extends React.Component<UsersPropsType> {
+// //подключаем thunkCreator (санки)
+// onPageChanged = (pageNumber: number) => {
+//     const {pageSize, filter} = this.props;
+//     this.props.getUsers(pageNumber, pageSize, filter)
+// }
+// onPageChanged = (pageNumber: number) => {
+//     this.props.setCurrentPage(pageNumber);
+//     this.props.setIsFetching(true)
+//     usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+//         this.props.setIsFetching(false)
+//         this.props.setUsers(data.items)
+//     })
+// }
 
-    //подключаем thunkCreator (санки)
-    componentDidMount() {
-        const {currentPage, pageSize, filter} = this.props;
-        this.props.getUsers(currentPage, pageSize, filter);
-    }
+// onFilterChanged = (filter: FilterType) => {
+//     const {pageSize} = this.props;
+//     this.props.getUsers(1, pageSize, filter)
+// }
 
-    // componentDidMount() {
-    //     this.props.setIsFetching(true)
-    //     usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-    //         this.props.setIsFetching(false)
-    //         this.props.setUsers(data.items)
-    //         this.props.setTotalUsersCount(data.totalCount)
-    //     })
-    // }
-
-    //подключаем thunkCreator (санки)
-    onPageChanged = (pageNumber: number) => {
-        const {pageSize, filter} = this.props;
-        this.props.getUsers(pageNumber, pageSize, filter)
-    }
-    // onPageChanged = (pageNumber: number) => {
-    //     this.props.setCurrentPage(pageNumber);
-    //     this.props.setIsFetching(true)
-    //     usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-    //         this.props.setIsFetching(false)
-    //         this.props.setUsers(data.items)
-    //     })
-    // }
-
-    onFilterChanged = (filter: FilterType) => {
-        const {pageSize} = this.props;
-        this.props.getUsers(1, pageSize, filter)
-    }
-
-    render() {
-        return <>
-            {this.props.isFetching ? <Preloader/> : null}
-            {/*<Paginator />*/}
-            <Users
-                totalItemsCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                onPageChanged={this.onPageChanged}
-                onFilterChanged={this.onFilterChanged}
-                users={this.props.users}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                followingInProgress={this.props.followingInProgress}
-                portionSize={this.props.portionSize}
-                // setIsFollowingProgress={this.props.setIsFollowingProgress}
-            />
-        </>
-    }
-}
+// render() {
+// return <>
+//     {this.props.isFetching ? <Preloader/> : null}
+//     {/*<Paginator />*/}
+//     <Users
+//         // totalItemsCount={this.props.totalUsersCount}
+//         // pageSize={this.props.pageSize}
+//         // currentPage={this.props.currentPage}
+//         onPageChanged={this.onPageChanged}
+//         onFilterChanged={this.onFilterChanged}
+//         users={this.props.users}
+//         follow={this.props.follow}
+//         unfollow={this.props.unfollow}
+//         followingInProgress={this.props.followingInProgress}
+//         portionSize={this.props.portionSize}
+//         // setIsFollowingProgress={this.props.setIsFollowingProgress}
+//     />
+// </>
+// }
+// }
 
 //refactoring
 // let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
@@ -126,18 +91,18 @@ class UsersContainer extends React.Component<UsersPropsType> {
 //         followingInProgress: state.usersPage.followingInProgress
 //     }
 // }
-let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
-    return {
-        users: getUsers(state),
-        pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state),
-        portionSize: getPortionSize(state),
-        filter: getUsersFilter(state)
-    }
-}
+// let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
+//     return {
+//         users: getUsers(state),
+//         pageSize: getPageSize(state),
+//         totalUsersCount: getTotalUsersCount(state),
+//         currentPage: getCurrentPage(state),
+//         isFetching: getIsFetching(state),
+//         followingInProgress: getFollowingInProgress(state),
+//         portionSize: getPortionSize(state),
+//         filter: getUsersFilter(state)
+//     }
+// }
 
 // let mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
 //
@@ -163,15 +128,15 @@ let mapStateToProps = (state: AllAppStateType): MapStateToPropsType => {
 //     }
 // }
 
-export default compose<React.ComponentType>(
-    connect(mapStateToProps, {
-        follow,
-        unfollow,
-        setCurrentPage,
-        setIsFollowingProgress,
-        getUsers: requestUsersThunkCreator
-    })
-)(UsersContainer);
+// export default compose<React.ComponentType>(
+//     connect(mapStateToProps, {
+//         follow,
+//         unfollow,
+//         setCurrentPage,
+//         setIsFollowingProgress,
+//         getUsers: requestUsersThunkCreator
+//     })
+// )(UsersContainer);
 // let withRedirectComponent = withAuthRedirect(UsersContainer)
 //
 // export default connect(mapStateToProps,

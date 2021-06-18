@@ -1,5 +1,5 @@
-import {GetTasksResponseType} from "../Components/Users/UsersContainer";
 import {instance, LoginAuthResponseType} from "./API";
+import {UsersType} from "../redux/users-reducer";
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number, term: string = "", friend: null | boolean = null) {
@@ -17,7 +17,11 @@ export const usersAPI = {
         // .then(response => response.data)
     }
 }
-
+export type GetTasksResponseType = {
+    items: Array<UsersType>
+    totalCount: number
+    error: string | null
+}
 // export type FollowPostPropsType = {
 //     data: {},
 //     messages: [],
