@@ -13,7 +13,7 @@ import store, {AllAppStateType} from "./redux/Redux-store";
 import Preloader from "./Components/Common/Preloader/Preloader";
 import {initializeApp} from "./redux/app-reducer";
 import {WithSuspense} from "./Components/HOC/WithSuspense";
-import { UsersPage } from "./Components/Users/UsersContainer";
+import {UsersPage} from "./Components/Users/UsersContainer";
 
 const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));

@@ -10,6 +10,7 @@ type UsersPageType = {
     pageTitle: string
 }
 
+//после рефакторинга
 export const UsersPage: React.FC<UsersPageType> = (props) => {
 
     const isFetching = useSelector(getIsFetching)

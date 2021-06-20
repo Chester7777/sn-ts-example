@@ -189,7 +189,7 @@ export const unfollow = (userId: number): ThunkType => {
 }
 
 
-//refactoring ублирования кода
+//refactoring дублирование кода
 // export const follow = (userId: number) => {
 //     return async (dispatch: Dispatch) => {
 //         dispatch(setIsFollowingProgress(true, userId));
