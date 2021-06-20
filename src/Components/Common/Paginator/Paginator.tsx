@@ -12,7 +12,6 @@ type PaginatorType = {
     onPageChanged: (pageNumber: number) => void
 }
 
-
 export let Paginator: React.FC<PaginatorType> = (props) => {
 
     const portionSize = useSelector<AllAppStateType, number>(state => state.usersPage.portionSize);

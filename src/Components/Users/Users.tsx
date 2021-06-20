@@ -2,7 +2,7 @@ import React, {FC, useEffect} from "react";
 import s from "./Users.module.css";
 import {FilterType, follow, requestUsersThunkCreator, unfollow, UsersType} from "../../redux/users-reducer";
 import userPhoto from "../../asseds/images/user.png";
-import {NavLink} from "react-router-dom"
+import {NavLink, useHistory} from "react-router-dom"
 import {Paginator} from "../Common/Paginator/Paginator";
 import {UsersSearchForm} from "./UsersSearchForm";
 import {useDispatch, useSelector} from "react-redux";
@@ -25,7 +25,6 @@ type PostPropsType = {
 
 export const Users: FC<PropsType> = (props) => {
 
-    const dispatch = useDispatch();
     const totalUsersCount = useSelector(getTotalUsersCount);
     const currentPage = useSelector(getCurrentPage);
     const pageSize = useSelector(getPageSize);
@@ -34,9 +33,20 @@ export const Users: FC<PropsType> = (props) => {
     const followingInProgress = useSelector(getFollowingInProgress);
     const portionSize = useSelector(getPortionSize);
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    //синхронизация URL адреса
+    useEffect(() => {
+        history.push({
+            pathname: `/users`,
+            search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+        })
+    }, [filter, currentPage]);
+
     useEffect(() => {
         dispatch(requestUsersThunkCreator(currentPage, pageSize, filter));
-    }, [])
+    }, []);
 
     //подключаем thunkCreator (санки)
     const onPageChanged = (pageNumber: number) => {
@@ -58,7 +68,7 @@ export const Users: FC<PropsType> = (props) => {
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
-    }
+    };
 
     return <div>
         <UsersSearchForm onFilterChanged={onFilterChanged}/>
