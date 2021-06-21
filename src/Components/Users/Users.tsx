@@ -14,6 +14,7 @@ import {
     getUsers,
     getUsersFilter
 } from "../../redux/users-selectors";
+import * as queryString from "querystring";
 
 
 type PropsType = {}
@@ -38,15 +39,39 @@ export const Users: FC<PropsType> = (props) => {
 
     //синхронизация URL адреса
     useEffect(() => {
+        const parsed = queryString.parse(history.location.search.substr(1)) as {term: string, page: string, friend: string};
+
+        let actualPage = currentPage;
+        let actualFilter = filter;
+
+        if(!!parsed.page) actualPage = Number(parsed.page);
+        if(!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string};
+
+        switch (parsed.friend) {
+            case "null":
+                actualFilter = {...actualFilter, friend: null}
+                break;
+            case "true":
+                actualFilter = {...actualFilter, friend: true}
+                break;
+            case "false":
+                actualFilter = {...actualFilter, friend: false}
+                break;
+        }
+
+
+        dispatch(requestUsersThunkCreator(actualPage, pageSize, actualFilter));
+    }, []);
+
+    //синхронизация URL адреса
+    useEffect(() => {
         history.push({
             pathname: `/users`,
             search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
         })
     }, [filter, currentPage]);
 
-    useEffect(() => {
-        dispatch(requestUsersThunkCreator(currentPage, pageSize, filter));
-    }, []);
+
 
     //подключаем thunkCreator (санки)
     const onPageChanged = (pageNumber: number) => {
