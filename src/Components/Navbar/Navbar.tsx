@@ -8,7 +8,6 @@ const Navbar: React.FC = (props) => {
     return (
         <nav className={s.nav}>
             <div className={`${s.item} ${s.active}`}>
-
                 {/*меняет url в браузере без перезакрузки страницы*/}
                 <NavLink activeClassName={s.active} to="/profile">Profile</NavLink>
             </div>

@@ -9,7 +9,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     getCurrentPage,
     getFollowingInProgress,
-    getPageSize, getPortionSize,
+    getPageSize,
+    getPortionSize,
     getTotalUsersCount,
     getUsers,
     getUsersFilter
@@ -39,13 +40,13 @@ export const Users: FC<PropsType> = (props) => {
 
     //синхронизация URL адреса
     useEffect(() => {
-        const parsed = queryString.parse(history.location.search.substr(1)) as {term: string, page: string, friend: string};
+        const parsed = queryString.parse(history.location.search.substr(1)) as { term: string, page: string, friend: string };
 
         let actualPage = currentPage;
         let actualFilter = filter;
 
-        if(!!parsed.page) actualPage = Number(parsed.page);
-        if(!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string};
+        if (!!parsed.page) actualPage = Number(parsed.page);
+        if (!!parsed.term) actualFilter = {...actualFilter, term: parsed.term as string};
 
         switch (parsed.friend) {
             case "null":
@@ -72,7 +73,6 @@ export const Users: FC<PropsType> = (props) => {
     }, [filter, currentPage]);
 
 
-
     //подключаем thunkCreator (санки)
     const onPageChanged = (pageNumber: number) => {
         dispatch(requestUsersThunkCreator(pageNumber, pageSize, filter));
@@ -93,7 +93,8 @@ export const Users: FC<PropsType> = (props) => {
     let pages = [];
     for (let i = 1; i <= pageCount; i++) {
         pages.push(i);
-    };
+    }
+    ;
 
     return <div>
         <UsersSearchForm onFilterChanged={onFilterChanged}/>

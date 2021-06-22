@@ -1,12 +1,10 @@
 import React, {lazy} from "react";
 import "antd/dist/antd.css";
-import {BrowserRouter, Link, NavLink, Redirect, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Link, Redirect, Route, Switch} from "react-router-dom";
 import "./App.css";
 import Music from "./Components/Music/Music";
-import Navbar from "./Components/Navbar/Navbar";
 import News from "./Components/News/news";
 import Setting from "./Components/Setting/Setting";
-import HeaderContainer from "./Components/Header/HeaderContainer"
 import Login from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
@@ -15,13 +13,12 @@ import Preloader from "./Components/Common/Preloader/Preloader";
 import {initializeApp} from "./redux/app-reducer";
 import {WithSuspense} from "./Components/HOC/WithSuspense";
 import {UsersPage} from "./Components/Users/UsersContainer";
-import {Avatar, Button, Col, Row} from "antd";
-import {Layout, Menu, Breadcrumb} from "antd";
-import {UserOutlined, LaptopOutlined, NotificationOutlined} from "@ant-design/icons";
-import s from "./Components/Navbar/Navbar.module.css";
+import {Breadcrumb, Layout, Menu} from "antd";
+import {LaptopOutlined, NotificationOutlined, UserOutlined} from "@ant-design/icons";
+import {Header} from "./Components/Header/Header";
 
 const {SubMenu} = Menu;
-const {Header, Content, Footer, Sider} = Layout;
+const {Content, Footer, Sider} = Layout;
 
 const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));
@@ -55,21 +52,7 @@ class App extends React.Component<AppType> {
         return (
             <BrowserRouter>
                 <Layout>
-                    <Header className="header">
-                        <div className="logo"/>
-                        <Row>
-                            <Col span={20}>
-                                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-                                    <Menu.Item key="1">
-                                        <Link to="/developers">Developers</Link>
-                                    </Menu.Item>
-                                </Menu>
-                            </Col>
-                            <Col span={4}>
-                                <Avatar style={{backgroundColor: '#87d068'}} icon={<UserOutlined/>}/>
-                            </Col>
-                        </Row>
-                    </Header>
+                    <Header/>
                     <Content style={{padding: '0 50px'}}>
                         <Breadcrumb style={{margin: '16px 0'}}>
                             <Breadcrumb.Item>Home</Breadcrumb.Item>
@@ -138,7 +121,7 @@ class App extends React.Component<AppType> {
                             </Content>
                         </Layout>
                     </Content>
-                    <Footer style={{textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
+                    <Footer style={{textAlign: 'center'}}>Sotial Network ©2021 Created by Chausov</Footer>
                 </Layout>
 
                 {/*без Ant Design*/}
