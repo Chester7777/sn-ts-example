@@ -66,7 +66,7 @@ export const Users: FC<PropsType> = (props) => {
     //синхронизация URL адреса
     useEffect(() => {
         history.push({
-            pathname: `/users`,
+            pathname: `/developers`,
             search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
         })
     }, [filter, currentPage]);
