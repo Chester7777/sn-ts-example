@@ -22,6 +22,7 @@ const {Content, Footer, Sider} = Layout;
 
 const DialogsContainer = lazy(() => import("./Components/Dialogs/DialogsContainer"));
 const ProfileContainer = lazy(() => import("./Components/Profile/ProfileContainer"));
+const ChatPage = lazy(() => import("./pages/Chat/ChatPage"));
 
 
 type AppType = {
@@ -92,7 +93,7 @@ class App extends React.Component<AppType> {
                                             <Link to="/music">Music</Link>
                                         </Menu.Item>
                                         <Menu.Item key="8">
-
+                                            <Link to="/chat">Chat</Link>
                                         </Menu.Item>
                                     </SubMenu>
                                     <SubMenu key="sub3" icon={<NotificationOutlined/>} title="Settings">
@@ -116,6 +117,7 @@ class App extends React.Component<AppType> {
                                     <Route path="/settings" render={() => <Setting/>}/>
                                     <Route path="/developers" render={() => <UsersPage pageTitle={"User"}/>}/>
                                     <Route path="/login" render={() => <Login/>}/>
+                                    <Route path="/chat" render={WithSuspense(ChatPage)}/>
                                     <Route path="*" render={() => <div><b>404 NOT FOUND</b></div>}/>
                                 </Switch>
                             </Content>
