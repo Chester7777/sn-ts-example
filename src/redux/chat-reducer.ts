@@ -14,7 +14,6 @@ export type InitialStateType = {
     messages: ChatMessageType[]
     status: StatusChangedType
 }
-// export type InitialStateType = typeof initialState;
 
 
 let initialState = {
