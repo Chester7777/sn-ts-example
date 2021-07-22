@@ -22,7 +22,6 @@ const AddMassageForm: React.FC<InjectedFormProps<AddMassageFormType>> = (props) 
                     validate={[required, maxLength50]}
                 />
             </div>
-
             <div className={s.addTextButton}>
                 <button>send</button>
             </div>

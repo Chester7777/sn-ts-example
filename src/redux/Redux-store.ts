@@ -9,6 +9,7 @@ import {reducer as formReducer} from "redux-form";
 import appReducer from "./app-reducer";
 import chatReducer from "./chat-reducer";
 
+
 // функция combineReducers склеивает reducer, тоесть создает state
 let reducers = combineReducers({
     profilePage: profilePageReducer,

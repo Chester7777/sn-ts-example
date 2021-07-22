@@ -4,7 +4,6 @@ import {chatAPI, ChatMessageAPIType, StatusChangedType} from "../API/ChatAPI";
 import {v1} from "uuid";
 
 
-
 const SET_MESSAGES_RECEIVED = "sn/chat/SET_MESSAGES_RECEIVED";
 const SET_STATUS_CHANGED = "sn/chat/SET_STATUS_CHANGED";
 type ActionsType = SetChatMessagesType | SetStatusChanged;
