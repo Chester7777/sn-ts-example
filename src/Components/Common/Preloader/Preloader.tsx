@@ -1,5 +1,5 @@
 import React from "react";
-import preloader from "../../../asseds/images/Pinwheel.gif";
+import preloader from "../../../asseds/images/icons8_Spinner.gif";
 
 
 let Preloader: React.FC = () => {
