@@ -27,7 +27,7 @@ const errorHandler = () => {
 
 const cleanUp = () => {
     ws?.removeEventListener("close", closeHandler);
-    ws?.removeEventListener("message", messageHandler);1
+    ws?.removeEventListener("message", messageHandler);
     ws?.removeEventListener("open", openHandler);
     ws?.removeEventListener("error", errorHandler);
 }
