@@ -15,6 +15,8 @@ const AddMassageForm: React.FC<InjectedFormProps<AddMassageFormType>> = (props) 
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={s.addText}>
+                <div className={s.Posts_decorated_Message_2}></div>
+                <div className={s.Posts_decorated_Message_1}></div>
                 <Field
                     component={Textarea}
                     name="newMessageText"
